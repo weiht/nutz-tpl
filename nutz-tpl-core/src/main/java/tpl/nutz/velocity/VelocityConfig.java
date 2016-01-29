@@ -63,6 +63,7 @@ public class VelocityConfig {
 	private Properties config;
 	private String encoding = DEFAULT_ENCODING;
 	private Context rootContext;
+	private String templateRepositories;
 	private File[] repoDirs;
 	private Ioc2 ioc;
 	private boolean devMode = false;
@@ -130,8 +131,10 @@ public class VelocityConfig {
 	}
 
 	private void initFileResourceLoader() {
-		String paths = System.getProperty(SYS_PROP_VELOCITY_TEMPLATE_PATHS);
-		if (paths == null) return;
+		String paths = templateRepositories;
+		if (paths == null || paths.isEmpty())
+			paths = System.getProperty(SYS_PROP_VELOCITY_TEMPLATE_PATHS);
+		if (paths == null || paths.isEmpty()) return;
 		List<File> repos = new ArrayList<File>();
 		StringBuilder buff = new StringBuilder();
 		for (String p: paths.split(File.pathSeparator)) {
@@ -226,5 +229,9 @@ public class VelocityConfig {
 
 	public String getResourceLocation() {
 		return resourceLocation;
+	}
+	
+	public void setTemplateRepositories(String repos) {
+		this.templateRepositories = repos;
 	}
 }

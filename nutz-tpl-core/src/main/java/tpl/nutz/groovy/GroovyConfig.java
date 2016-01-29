@@ -49,6 +49,7 @@ public class GroovyConfig {
 	private Map<String, String> resMappings = new HashMap<String, String>();
 	
 	private void loadGroovyClasspaths() {
+		if (groovyClasspaths != null && groovyClasspaths.length > 0) return;
 		List<String> classpaths = new ArrayList<String>();
 		String paths = System.getProperty(SYS_PROP_GROOVY_SCRIPT_PATHS);
 		if (paths != null) {
@@ -164,7 +165,6 @@ public class GroovyConfig {
 		if (fwd.startsWith("/")) {
 			return fwd;
 		}
-		//TODO Ëß£Êûê./Âí?../Á≠â„??
 		int ix = path.lastIndexOf("/");
 		if (ix < 1) {
 			return fwd;
@@ -227,6 +227,14 @@ public class GroovyConfig {
 
 	public String getResourceLocation() {
 		return resourceLocation;
+	}
+	
+	public void setGroovyClasspath(String cp) {
+		if (cp == null || cp.isEmpty()) {
+			groovyClasspaths = null;
+		} else {
+			groovyClasspaths = cp.split(File.pathSeparator);
+		}
 	}
 
 	public boolean isDevMode() {
