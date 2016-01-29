@@ -9,10 +9,13 @@ require.config(requireConfig);
 
 define([
     'require',
+	'css!bootstrap/css/bootstrap.min.css',
+	'css!bootstrap/css/bootstrap-theme.min.css',
 	'css!matrix/css/styles.css',
     'angular',
-    'app'
-], function (require, __, ng) {
+    'app',
+    'css!lib/fontawesome/css/font-awesome.min.css'
+], function (require, _, __, ___, ng) {
     'use strict';
 
     require(['domReady!'], function (document) {

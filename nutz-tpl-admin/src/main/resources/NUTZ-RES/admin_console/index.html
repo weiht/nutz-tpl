@@ -1,34 +1,45 @@
-<!Doctype html>
-#bundle()
+<!DOCTYPE html>
 <html>
+#bundle()
 <head>
 #parse('inc/meta.html')
 </head>
-<body>
+<body class="matrix">
 <div id="header">
-  <h1><a href="index.html">#text('title')</a></h1>
+  <h1 class="pull-left"><a href="index.html">#text('title')</a></h1>
+  <div id="top-nav" class="navbar navbar-inverse pull-left">
+    <ul class="nav">
+      <li>Home</li>
+    </ul>
+  </div>
+  <div id="search" class="pull-right">Search
+  </div>
+  <div class="clearfix"></div>
 </div>
-
-<!--top-Header-menu-->
-<div id="user-nav" class="navbar navbar-inverse">
-  <ul class="nav">
-  </ul>
-</div>
-<div id="search">
-</div>
-<!--close-top-Header-menu-->
 
 <!--sidebar-menu-->
 #bundle('general')
-<div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i>#text('dashboard')</a>
+<div id="sidebar">
   <ul>
+    <li><a href="#" class="visible-phone"><i class="fa fa-home"></i> #text('dashboard')</a></li>
   </ul>
 </div>
 #end
 <!--sidebar-menu-->
+
+<!--main-container-part-->
+<div id="content">
+<!--breadcrumbs-->
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="index.html" title="#text('gohome')" class="tip-bottom"><i class="icon-home"></i> #text('homepage')</a></div>
+  </div>
+<!--End-breadcrumbs-->
+  <div class="container-fluid">
+  </div>
+</div>
 
 #parse('inc/scripts.html')
 <script src="${request.contextPath}/lib/require/require.js" data-main="${request.contextPath}/s/admin_console/main.js"></script>
 </body>
-</html>
 #end
+</html>
