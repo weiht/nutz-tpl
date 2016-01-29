@@ -9,6 +9,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.Map;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +31,11 @@ extends HttpServlet {
 	
 	private static final Logger logger = LoggerFactory.getLogger(GroovyVelocityServlet.class);
 	
+	public static final String KEY_GROOVY_CONFIG_BEAN = "groovyConfigBean";
+	public static final String DEF_GROOVY_CONFIG_KEY = "groovyConfig";
+	public static final String KEY_VELOCITY_CONFIG_BEAN = "velocityConfigBean";
+	public static final String DEF_VELOCITY_CONFIG_KEY = "velocityConfig";
+
 	private VelocityConfig velocityConfig;
 	private GroovyConfig groovyConfig;
 
@@ -118,7 +124,14 @@ extends HttpServlet {
 		return binding;
 	}
 
-	public void setVelocityConfig(VelocityConfig velocityConfig) {
-		this.velocityConfig = velocityConfig;
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		String n = config.getInitParameter(KEY_GROOVY_CONFIG_BEAN);
+		if (n == null || n.isEmpty()) n = DEF_GROOVY_CONFIG_KEY;
+		groovyConfig = TplJsonIocProvider.nutzIoc().get(null, n);
+		n = config.getInitParameter(KEY_VELOCITY_CONFIG_BEAN);
+		if (n == null || n.isEmpty()) n = DEF_VELOCITY_CONFIG_KEY;
+		velocityConfig = TplJsonIocProvider.nutzIoc().get(null, n);
 	}
 }
