@@ -1,12 +1,12 @@
 var ioc = {
 	"velocityConfig": {
-		"type": "nrt.jetty.web.VelocityConfig",
+		"type": "tpl.velocity.VelocityConfig",
 		"fields": {
 			"ioc": {"refer": "$ioc"}
 		}
 	},
 	"groovyConfig": {
-		"type": "nrt.jetty.web.GroovyConfig",
+		"type": "tpl.groovy.GroovyConfig",
 		"fields": {
 			"ioc": {"refer": "$ioc"}
 		}

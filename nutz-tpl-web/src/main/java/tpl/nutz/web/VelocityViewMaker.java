@@ -4,7 +4,7 @@ import org.nutz.ioc.Ioc;
 import org.nutz.mvc.View;
 import org.nutz.mvc.ViewMaker;
 
-import tpl.nutz.velocity.VelocityConfig;
+import tpl.velocity.VelocityConfig;
 
 public class VelocityViewMaker
 implements ViewMaker {

@@ -21,8 +21,8 @@ import org.nutz.mvc.Mvcs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import tpl.nutz.groovy.GroovyConfig;
-import tpl.nutz.velocity.VelocityConfig;
+import tpl.groovy.GroovyConfig;
+import tpl.velocity.VelocityConfig;
 
 public class GroovyVelocityServlet
 extends HttpServlet {

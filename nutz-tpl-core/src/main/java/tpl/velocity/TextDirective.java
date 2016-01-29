@@ -1,4 +1,4 @@
-package tpl.nutz.velocity;
+package tpl.velocity;
 
 import java.io.IOException;
 import java.io.Writer;

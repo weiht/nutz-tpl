@@ -1,0 +1,5 @@
+<tools>
+	<toolbox scope="application">
+		<tool class="tpl.shiro.velocity.ShiroTool"/>
+	</toolbox>
+</tools>

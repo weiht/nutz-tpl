@@ -1,10 +1,11 @@
-package tpl.nutz.groovy;
+package tpl.groovy;
 
 import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 import groovy.util.GroovyScriptEngine;
 import groovy.util.ResourceException;
 import groovy.util.ScriptException;
+import tpl.velocity.VelocityConfig;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,8 +21,6 @@ import org.nutz.ioc.Ioc2;
 import org.nutz.json.Json;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import tpl.nutz.velocity.VelocityConfig;
 
 public class GroovyConfig {
 	private static final Logger logger = LoggerFactory.getLogger(GroovyConfig.class);

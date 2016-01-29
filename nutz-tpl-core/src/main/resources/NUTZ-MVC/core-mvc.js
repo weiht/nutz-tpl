@@ -1,6 +1,6 @@
 var ioc = {
 	"velocityView": {
-		"type": "nrt.jetty.web.VelocityView",
+		"type": "tpl.nutz.web.VelocityView",
 		"fields": {
 			"config": {"refer": "velocityConfig"}
 		}

@@ -1,6 +1,8 @@
-package tpl.nutz.velocity;
+package tpl.velocity;
 
 import groovy.lang.Binding;
+import tpl.groovy.GroovyBindingsHelper;
+import tpl.groovy.GroovyConfig;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -13,9 +15,6 @@ import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.directive.Directive;
 import org.apache.velocity.runtime.parser.Token;
 import org.apache.velocity.runtime.parser.node.Node;
-
-import tpl.nutz.groovy.GroovyBindingsHelper;
-import tpl.nutz.groovy.GroovyConfig;
 
 public class GroovyEmbedDirective
 extends Directive {
