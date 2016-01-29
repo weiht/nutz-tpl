@@ -1,0 +1,13 @@
+<!Doctype html>
+#bundle()
+<html>
+<head>
+#parse('inc/meta.html')
+</head>
+<body>
+
+#parse('inc/scripts.html')
+<script src="${request.contextPath}/lib/require/require.js" data-main="${request.contextPath}/s/admin_console/main.js"></script>
+</body>
+</html>
+#end

@@ -11,6 +11,10 @@ window.requireConfig = {
     	location: 'lib/jquery',
     	main: 'jquery-2.2.0.min'
     }, {
+    	name: 'angular',
+    	location: 'lib/angular',
+    	main: 'angular.min'
+    }, {
     	name: 'bootstrap',
     	location: 'lib/bootstrap',
     	main: 'js/bootstrap.min'
@@ -39,9 +43,6 @@ window.requireConfig = {
 	 * fine tuning to dependency mgt'
 	 */
     shim: {
-        'jquery': {
-            exports: 'jQuery'
-        },
         'bootstrap': {
             deps: ['jquery']
         },
@@ -49,64 +50,13 @@ window.requireConfig = {
             exports: 'angular',
             deps: ['jquery']
         },
-        'angular-route': {
+        'angular/angular-route': {
             deps: ['angular']
         },
-        'date-utils': {
+        'angular/angular-resource': {
             deps: ['angular']
-        },
-        'bs-date-picker': {
-            deps: ['bootstrap']
-        },
-        'bs-date-picker-cn': {
-            deps: ['bs-date-picker']
-        },
-        'date-picker': {
-            deps: ['angular', 'bs-date-picker', 'bs-date-picker-cn']
-        },
-        'angular-resource': {
-            deps: ['angular']
-        },
-        'ui-route': {
-            deps: ['angular']
-        },
-        'jq-ui': {
-        	deps: ['jquery']
-        },
-        'jq-ui-layout': {
-        	deps: ['jquery', 'jq-ui']
-        },
-        'ui-layout': {
-        	deps: ['angular', 'jq-ui-layout']
-        },
-        'tinymce': {
-        	deps: ['jquery']
-        },
-        'gritter': {
-        	deps: ['jquery']
         },
         'ztree': {
-        	deps: ['jquery']
-        },
-        'autocomplete': {
-        	deps: ['jquery']
-        },
-        'ui-tinymce': {
-        	deps: ['tinymce']
-        },
-        'hats-jq-plugins': {
-        	deps: ['jquery', 'bootstrap', 'angular', 'gritter', 'jq-ui-layout', 'bootstrap-context-menu']
-        },
-        'bootstrap-context-menu': {
-        	deps: ['jquery', 'bootstrap']
-        },
-        'context-menu': {
-        	deps: ['angular', 'bootstrap-context-menu']
-        },
-        'file-upload': {
-        	deps: ['lib/js/jquery.iframe-transport.min', 'lib/js/upload/jquery.fileupload']
-        },
-        'fullscreen': {
         	deps: ['jquery']
         }
     },

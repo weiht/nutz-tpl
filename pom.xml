@@ -51,6 +51,7 @@
 		<module>nutz-tpl-web</module>
 		<module>nutz-tpl-core</module>
 		<module>template-webapp</module>
+		<module>nutz-tpl-admin</module>
 	</modules>
 	
 	<build>

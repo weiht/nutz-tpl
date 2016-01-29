@@ -1,0 +1,8 @@
+<script type="text/javascript">
+window.contextPath = '${request.contextPath}';
+window.contextUrl = '${request.scheme}://${request.getHeader("host")}${request.contextPath}';
+var require = {
+        baseUrl: '${request.contextPath}'
+};
+</script><!-- basic scripts -->
+<script type="text/javascript" src="${request.contextPath}/lib/require/config.js"></script>
