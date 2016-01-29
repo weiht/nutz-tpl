@@ -1,0 +1,96 @@
+.d3RadialProgress .background {
+    fill: #FFFFFF;
+    fill-opacity: 0.01;
+}
+
+.d3RadialProgress .component {
+    fill: #e1e1e1;
+}
+
+.d3RadialProgress .component .label {
+    font-family: Myriad, "Helvetic Neue", Helvetica, Arial;
+    text-anchor: middle;
+    fill: #0000FF;
+}
+
+.d3RadialProgress .arc {
+    stroke-weight:0.1;
+    fill: #4e8fff;
+}
+
+
+.d3RadialProgress .arc2 {
+    stroke-weight:0.1;
+    fill: #3660b0;
+}
+
+.d3RadialProgress .label {
+    font-family:  Myriad, "Helvetic Neue", Helvetica, Arial;
+    text-anchor: middle;
+    font-size: 12px;
+}
+
+.d3RadialProgress .radial-svg {
+    display: block;
+    margin: 0 auto;
+}
+
+.d3RadialProgress.text-muted .component .label,
+.d3RadialProgress.radial-muted .arc {
+    fill: #777;
+}
+
+.d3RadialProgress.text-muted .labels .label,
+.d3RadialProgress.radial-muted .arc2 {
+    fill: #555;
+}
+
+.d3RadialProgress.text-primary .component .label,
+.d3RadialProgress.radial-primary .arc {
+    fill: #337AB7;
+}
+
+.d3RadialProgress.text-primary .labels .label,
+.d3RadialProgress.radial-primary .arc2 {
+    fill: #135A97;
+}
+
+.d3RadialProgress.text-success .component .label,
+.d3RadialProgress.radial-success .arc {
+    fill: #3C763D;
+}
+
+.d3RadialProgress.text-success .labels .label,
+.d3RadialProgress.radial-success .arc2 {
+    fill: #1C561D;
+}
+
+.d3RadialProgress.text-info .component .label,
+.d3RadialProgress.radial-info .arc {
+    fill: #31708F;
+}
+
+.d3RadialProgress.text-info .labels .label,
+.d3RadialProgress.radial-info .arc2 {
+    fill: #11506F;
+}
+
+.d3RadialProgress.text-warning .component .label,
+.d3RadialProgress.radial-warning .arc {
+    fill: #8A6D3B;
+}
+
+.d3RadialProgress.text-warning .labels .label,
+.d3RadialProgress.radial-warning .arc2 {
+    fill: #6A4D1B;
+}
+
+.d3RadialProgress.text-danger .component .label,
+.d3RadialProgress.radial-danger .arc {
+    fill: #A94442;
+}
+
+.d3RadialProgress.text-danger .labels .label,
+.d3RadialProgress.radial-danger .arc2 {
+    fill: #892422;
+}

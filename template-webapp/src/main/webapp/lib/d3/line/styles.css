@@ -1,0 +1,72 @@
+.d3LineChart {
+	display: inline-block;
+}
+
+.d3LineChart .axis path,
+.d3LineChart .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.d3LineChart .x.axis path {
+  display: none;
+}
+
+.d3LineChart .line {
+  fill: none;
+  stroke: skyblue;
+  stroke-width: 1.5px;
+}
+
+.d3LineChart.text-muted text {
+	fill: #777
+}
+
+.d3LineChart.line-muted .line {
+    stroke: #777;
+}
+
+.d3LineChart.text-primary text {
+    fill: #337AB7;
+}
+
+.d3LineChart.line-primary .line {
+    stroke: #337AB7;
+}
+
+.d3LineChart.text-success text {
+    fill: #3C763D;
+}
+
+.d3LineChart.line-success .line {
+    stroke: #3C763D;
+}
+
+.d3LineChart.text-info text {
+    fill: #31708F;
+}
+
+.d3LineChart.line-info .line {
+    stroke: #31708F;
+}
+
+.d3LineChart.line-info .line:hover {
+    stroke: #5190AF;
+}
+
+.d3LineChart.text-warning text {
+    fill: #8A6D3B;
+}
+
+.d3LineChart.line-warning .line {
+    stroke: #8A6D3B;
+}
+
+.d3LineChart.text-danger text {
+    fill: #A94442;
+}
+
+.d3LineChart.line-danger .line {
+    stroke: #A94442;
+}

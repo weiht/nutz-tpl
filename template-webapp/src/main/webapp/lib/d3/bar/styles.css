@@ -1,0 +1,113 @@
+.d3BarChart[d3-bar-chart] {
+	display: inline-block;
+}
+
+.d3BarChart .axis path,
+.d3BarChart .axis line {
+	fill: none;
+	stroke: #000;
+	shape-rendering: crispEdges;
+}
+
+.d3BarChart .bar {
+	fill: #333;
+}
+
+.d3BarChart .bar:hover {
+	fill: #555;
+}
+
+.d3BarChart .x.axis path {
+	display: none;
+}
+
+.d3BarChart.text-muted text,
+.d3BarChart.bar-muted .bar {
+    fill: #777;
+}
+
+.d3BarChart.bar-muted .bar:hover {
+    fill: #999;
+}
+
+.d3BarChart.text-primary text,
+.d3BarChart.bar-primary .bar {
+    fill: #337AB7;
+}
+
+.d3BarChart.bar-primary .bar:hover {
+    fill: #539AD7;
+}
+
+.d3BarChart.text-success text,
+.d3BarChart.bar-success .bar {
+    fill: #3C763D;
+}
+
+.d3BarChart.bar-success .bar:hover {
+    fill: #5C965D;
+}
+
+.d3BarChart.text-info text,
+.d3BarChart.bar-info .bar {
+    fill: #31708F;
+}
+
+.d3BarChart.bar-info .bar:hover {
+    fill: #5190AF;
+}
+
+.d3BarChart.text-warning text,
+.d3BarChart.bar-warning .bar {
+    fill: #8A6D3B;
+}
+
+.d3BarChart.bar-warning .bar:hover {
+    fill: #AA8D5B;
+}
+
+.d3BarChart.text-danger text,
+.d3BarChart.bar-danger .bar {
+    fill: #A94442;
+}
+
+.d3BarChart.bar-danger .bar:hover {
+    fill: #C96462;
+}
+
+/*
+Bar chart tips
+*/
+
+.d3BarChartTip.d3-tip {
+	line-height: 1;
+	font-weight: bold;
+	padding: 12px;
+	background: rgba(0, 0, 0, 0.8);
+	color: #fff;
+	border-radius: 2px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3BarChartTip.d3-tip:after {
+	box-sizing: border-box;
+	display: inline;
+	font-size: 10px;
+	width: 100%;
+	line-height: 1;
+	color: rgba(0, 0, 0, 0.8);
+	content: "\25BC";
+	position: absolute;
+	text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3BarChartTip.d3-tip.n:after {
+	margin: -1px 0 0 0;
+	top: 100%;
+	left: 0;
+}
+
+/*
+End of bar chart tips
+*/
