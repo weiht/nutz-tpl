@@ -1,5 +1,6 @@
 define([
-	'angular'
+	'angular',
+	'matrix'
 ], function(ng) {
 
 var app = ng.module('app', []);

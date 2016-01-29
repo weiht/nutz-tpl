@@ -34,7 +34,7 @@ window.requireConfig = {
     
     map: {
     	'*': {
-    		css: 'lib/js/require/css'
+    		css: 'lib/require/css'
     	}
     },
     
