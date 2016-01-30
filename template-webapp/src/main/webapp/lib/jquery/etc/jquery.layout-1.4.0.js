@@ -30,7 +30,7 @@
  */
 
 // NOTE: For best readability, view with a fixed-width font and tabs equal to 4-chars
-
+require(['jquery'], function(jQuery) {
 ;(function ($) {
 
 // alias Math methods - used a lot!
@@ -6074,3 +6074,4 @@ if ($.effects) {
 }
 
 })( jQuery );
+});

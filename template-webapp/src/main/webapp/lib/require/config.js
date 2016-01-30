@@ -30,6 +30,10 @@ window.requireConfig = {
     	name: 'ztree',
     	location: 'lib/ztree',
     	main: 'jquery.ztree.all-3.5.min'
+    }, {
+    	name: 'necros',
+    	location: 'lib/necros',
+    	main: 'necros-angular'
     }],
     
     map: {

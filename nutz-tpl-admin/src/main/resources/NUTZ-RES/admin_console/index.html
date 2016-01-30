@@ -4,22 +4,33 @@
 <head>
 #parse('inc/meta.html')
 </head>
-<body class="matrix">
-<div id="header">
-  <h1 class="pull-left"><a href="index.html">#text('title')</a></h1>
-  <div id="top-nav" class="navbar navbar-inverse pull-left">
-    <ul class="nav">
-      <li>Home</li>
-    </ul>
+<body class="matrix" n-layout="{west:{size:220},north:{size:77}}">
+<div id="header" class="pane ui-layout-north" n-layout="{west:{size:220}}">
+  <div class="pane ui-layout-west pull-left" style="width:220px;">
+    <h1><a href="index.html">#text('title')</a></h1>
   </div>
-  <div id="search" class="pull-right">Search
+  <div class="pane ui-layout-center" style="position:absolute;top:0px;left:220px;width:100%">
+    <div id="top-nav" class="navbar navbar-inverse pull-left">
+      <ul class="nav">
+        <li><a>Home</a></li>
+      </ul>
+    </div>
+    <div class="clearfix"></div>
+<!--breadcrumbs-->
+    <div id="content-header">
+      <ol id="breadcrumb" class="breadcrumb">
+        <li>
+          <a href="index.html" title="#text('gohome')" class="tip-bottom"><i class="fa fa-home"></i> #text('homepage')</a>
+        </li>
+      </ol>
+    </div>
+<!--End-breadcrumbs-->
   </div>
-  <div class="clearfix"></div>
 </div>
 
 <!--sidebar-menu-->
 #bundle('general')
-<div id="sidebar">
+<div id="sidebar" class="pane ui-layout-west">
   <ul>
     <li><a href="#" class="visible-phone"><i class="fa fa-home"></i> #text('dashboard')</a></li>
   </ul>
@@ -28,12 +39,7 @@
 <!--sidebar-menu-->
 
 <!--main-container-part-->
-<div id="content">
-<!--breadcrumbs-->
-  <div id="content-header">
-    <div id="breadcrumb"> <a href="index.html" title="#text('gohome')" class="tip-bottom"><i class="icon-home"></i> #text('homepage')</a></div>
-  </div>
-<!--End-breadcrumbs-->
+<div id="content" class="pane ui-layout-center">
   <div class="container-fluid">
   </div>
 </div>

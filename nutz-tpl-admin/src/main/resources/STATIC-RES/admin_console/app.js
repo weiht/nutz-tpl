@@ -1,9 +1,10 @@
 define([
 	'angular',
+    'necros',
 	'matrix'
 ], function(ng) {
 
-var app = ng.module('app', []);
+var app = ng.module('app', ['necros']);
 
 app.config(['$controllerProvider', 
             '$compileProvider', '$filterProvider', '$provide',
