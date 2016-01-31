@@ -13,6 +13,7 @@ define([
 	'css!bootstrap/css/bootstrap-theme.min.css',
 	'css!matrix/css/styles.css',
     'angular',
+    'matrix',
     'app',
     'css!lib/fontawesome/css/font-awesome.min.css'
 ], function (require, _, __, ___, ng) {

@@ -17,6 +17,7 @@ body.matrix {
 	font-family: "Open Sans", sans-serif;
 	font-size: 12px;
 	color: #666;
+	background-color: #2E363F;
 	margin-top: -20px;
 }
 
@@ -64,6 +65,7 @@ body.matrix {
     padding: 0px;
     border-left: 1px solid #2E363F;
     border-right: 1px solid #000;
+    background-color: #1F262D;
 }
 
 #top-nav > ul > li > a {
@@ -102,4 +104,126 @@ body.matrix {
     background-repeat: no-repeat;
     font-size: 11px;
     color: #666;
+}
+
+#sidebar {
+	width: 220;
+}
+
+#sidebar-accordion.panel-group {
+	border-bottom: 1px solid #37414b;
+}
+
+#sidebar-accordion .panel {
+	border-radius: 0px;
+	margin: 0px;
+	border-top: 1px solid #37414b;
+	border-bottom: 1px solid #1f262d;
+	border-left: none;
+	border-right: none;
+	background-image: none;
+	background-color: transparent;
+}
+
+#sidebar-accordion .panel-heading {
+	padding: 0px;
+	background-image: none;
+	background-color: transparent;
+}
+
+#sidebar-accordion .panel-title {
+	font-size: 12px;
+	background-color: transparent;
+	background-image: none;
+}
+
+#sidebar-accordion .panel-title a,
+#sidebar-accordion .panel-body>ul>li>a {
+	display: block;
+	width: 100%;
+	padding: 10px 15px;
+	line-height: 20px;
+	color: #939da8;
+}
+
+#sidebar-accordion .panel-title a:hover {
+	background-color: #27a9e3;
+	color: #fff;
+	text-decoration: none;
+}
+
+#sidebar-accordion .panel.active {
+	border-bottom: 1px solid #27a9e3;
+	border-top: 1px solid #27a9e3;
+}
+
+#sidebar-accordion .panel.active .panel-title {
+	background-color: #27a9e3;
+}
+
+#sidebar-accordion .panel.active .panel-title a {
+	background: url("../img/menu-active.png") no-repeat scroll right center transparent !important;
+	color: #fff;
+	text-decoration: none;
+}
+
+#sidebar-accordion .panel-title a>i.fa:first-child {
+	margin-right: 10px;
+}
+
+#sidebar-accordion .panel-title a[data-toggle=collapse]:after {
+	font: normal normal normal 14px/1 FontAwesome;
+	content: "\f0d7";
+	position: absolute;
+	right: 15px;
+}
+
+#sidebar-accordion .panel-title a[data-toggle=collapse].collapsed:after {
+	content: "\f0da";
+}
+
+#sidebar-accordion .panel.active .panel-title a[data-toggle=collapse]:after {
+	content: " ";
+}
+
+#sidebar-accordion .panel-body {
+	border-radius: 0px;
+	border: none;
+	background-color: #1e242b;
+	background-image: none;
+	padding: 0px;
+}
+
+#sidebar-accordion .panel-body>ul.list-group {
+	border-radius: 0px;
+	border: none;
+	margin: 0px;
+}
+
+#sidebar-accordion .panel-body>ul.list-group>li {
+	border-radius: 0px;
+	border: none;
+	background-color: transparent;
+	background-image: none;
+	padding: 0px;
+}
+
+#sidebar-accordion .panel-body>ul.list-group>li>a {
+	padding: 10px 5px 10px 25px;
+	text-decoration: none;
+	font-size: 12px;
+	line-height: 20px;
+}
+
+#sidebar-accordion .panel-body>ul.list-group>li.active,
+#sidebar-accordion .panel-body>ul.list-group>li>a:hover,
+#sidebar-accordion .panel-body>ul.list-group>li.active>a {
+	color: #fff;
+	background-color: #28b779;
+}
+
+#workbench {
+	background: none repeat scroll 0 0 #eeeeee;
+	position: relative;
+	left: 220px;
 }

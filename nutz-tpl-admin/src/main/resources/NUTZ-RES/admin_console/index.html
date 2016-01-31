@@ -3,6 +3,7 @@
 #bundle()
 <head>
 #parse('inc/meta.html')
+<title>#text('title')</title>
 </head>
 <body class="matrix" n-layout="{west:{size:220},north:{size:77}}">
 <div id="header" class="pane ui-layout-north" n-layout="{west:{size:220}}">
@@ -30,16 +31,66 @@
 
 <!--sidebar-menu-->
 #bundle('general')
-<div id="sidebar" class="pane ui-layout-west">
-  <ul>
-    <li><a href="#" class="visible-phone"><i class="fa fa-home"></i> #text('dashboard')</a></li>
-  </ul>
+<div id="sidebar" class="pane ui-layout-west pull-left">
+
+<div class="panel-group" id="sidebar-accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default active">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a role="button" ng-click="">
+          <i class="fa fa-home"></i> #text('dashboard')
+        </a>
+      </h4>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#sidebar-accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <i class="fa fa-key"></i> parent 1
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+        <ul class="list-group">
+          <li class="list-group-item active"><a><i class="fa fa-caret-right"></i> Cras justo odio</a></li>
+          <li class="list-group-item"><a ng-click=""><i class="fa fa-caret-right"></i> Dapibus ac facilisis in</a></li>
+          <li class="list-group-item"><a ng-click=""><i class="fa fa-caret-right"></i> Morbi leo risus</a></li>
+          <li class="list-group-item"><a><i class="fa fa-caret-right"></i> Porta ac consectetur ac</a></li>
+          <li class="list-group-item"><a><i class="fa fa-caret-right"></i> Vestibulum at eros</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#sidebar-accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fa fa-lock"></i> parent 2
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <ul class="list-group">
+          <li class="list-group-item active"><a><i class="fa fa-caret-right"></i> Cras justo odio</a></li>
+          <li class="list-group-item"><a><i class="fa fa-caret-right"></i> Dapibus ac facilisis in</a></li>
+          <li class="list-group-item"><a><i class="fa fa-caret-right"></i> Morbi leo risus</a></li>
+          <li class="list-group-item"><a><i class="fa fa-caret-right"></i> Porta ac consectetur ac</a></li>
+          <li class="list-group-item"><a><i class="fa fa-caret-right"></i> Vestibulum at eros</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
 </div>
 #end
 <!--sidebar-menu-->
 
 <!--main-container-part-->
-<div id="content" class="pane ui-layout-center">
+<div id="workbench" class="pane ui-layout-center">
   <div class="container-fluid">
   </div>
 </div>
