@@ -20,8 +20,8 @@
 <!--breadcrumbs-->
     <div id="content-header">
       <ol id="breadcrumb" class="breadcrumb">
-        <li>
-          <a href="index.html" title="#text('gohome')" class="tip-bottom"><i class="fa fa-home"></i> #text('homepage')</a>
+        <li ng-repeat="br in breadcrumb">
+          <a href="javascript:void(0)" ng-click="openView(itm)"><i ng-class="br.iconClass || 'fa fa-circle-o'"></i> <span ng-bind="br.text"></span></a>
         </li>
       </ol>
     </div>
@@ -31,19 +31,19 @@
 
 <!--sidebar-menu-->
 #bundle('general')
-<div id="sidebar" class="pane ui-layout-west pull-left">
+<div id="sidebar" class="pane ui-layout-west pull-left" style="width:220px;">
 
 <div class="panel-group" id="sidebar-accordion" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default active">
+  <div class="panel panel-default" ng-repeat="itm in mainMenu">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a role="button" ng-click="">
-          <i class="fa fa-home"></i> #text('dashboard')
+        <a role="button" ng-click="itm.templateUrl && openView(itm, itm.path)">
+          <i ng-class="itm.iconClass||'fa fa-circle-o'"></i> <span ng-bind="itm.text"></span>
         </a>
       </h4>
     </div>
   </div>
-  <div class="panel panel-default">
+  <div class="panel panel-default hide">
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#sidebar-accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -63,7 +63,7 @@
       </div>
     </div>
   </div>
-  <div class="panel panel-default">
+  <div class="panel panel-default hide">
     <div class="panel-heading" role="tab" id="headingTwo">
       <h4 class="panel-title">
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#sidebar-accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -91,7 +91,7 @@
 
 <!--main-container-part-->
 <div id="workbench" class="pane ui-layout-center">
-  <div class="fill" n-section="{{workbench||'workbench.home'}}">
+  <div class="fill" n-section="{{workbenchSection||'workbench.home'}}">
   </div>
 </div>
 

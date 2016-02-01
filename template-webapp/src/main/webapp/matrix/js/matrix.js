@@ -16,7 +16,8 @@ define(['require', 'jquery'], function(require, $) {
 	}
 
     require(['domReady!'], function (document) {
-    	$('#sidebar-accordion .panel-title a[ng-click]').click(toggleActiveMenu);
-    	$('#sidebar-accordion .panel .list-group .list-group-item a[ng-click]').click(toggleActiveSubMenu);
+    	$('#sidebar-accordion')
+    		.delegate('.panel-title a[ng-click]', 'click', toggleActiveMenu)
+    		.delegate('.panel .list-group .list-group-item a[ng-click]', 'click', toggleActiveSubMenu);
     });
 });

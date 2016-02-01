@@ -146,4 +146,5 @@ mod.directive('section', nSectionDef);
 
 // End of section
 
+return mod;
 });

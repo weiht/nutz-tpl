@@ -106,6 +106,15 @@ body.matrix {
     color: #666;
 }
 
+#breadcrumb a:hover {
+	text-decoration: none;
+	color: #333;
+}
+
+#breadcrumb a i {
+    margin-right: 5px;
+}
+
 #sidebar {
 	width: 220;
 }

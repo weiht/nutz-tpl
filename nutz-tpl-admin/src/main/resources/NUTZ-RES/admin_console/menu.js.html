@@ -1,0 +1,27 @@
+define([
+	'angular'
+], function(ng) {
+
+#bundle('index')
+#bundle('general')
+#bundle()
+var mainMenu = [{
+	name: 'admin_console.home',
+	text: '#text('menu.home')',
+	iconClass: 'fa fa-home',
+	templateUrl: window.contextPath + '/admin_console/home.html'
+}, {
+    name: 'admin_console.prefs',
+    text: '#text('menu.prefs')',
+    iconClass: 'fa fa-table',
+    templateUrl: window.contextPath + '/admin_console/prefs.html',
+    requireModule: 's/admin_console/prefs',
+    controller: 'admin_console.prefs'
+}];
+#end
+#end
+#end
+
+return mainMenu;
+
+});
