@@ -4,6 +4,7 @@ import groovy.lang.Binding;
 import groovy.util.ResourceException;
 import groovy.util.ScriptException;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.context.Context;
+import org.apache.velocity.exception.ResourceNotFoundException;
 import org.nutz.lang.Streams;
 import org.nutz.mvc.Mvcs;
 import org.slf4j.Logger;
@@ -49,7 +51,13 @@ extends HttpServlet {
 		}
 		req.setCharacterEncoding(velocityConfig.getEncoding());
 		resp.setCharacterEncoding(velocityConfig.getEncoding());
-		render(req, resp, path);
+		try {
+			render(req, resp, path);
+		} catch (ResourceNotFoundException e) {
+			logger.info("", e);
+		} catch (Exception e) {
+			logger.warn("", e);
+		}
 	}
 
 	private void render(HttpServletRequest req, HttpServletResponse resp,

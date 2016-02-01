@@ -1,3 +1,46 @@
+<div class="fill least-padding auto-scroll">
 #bundle('menu')
-<h1>#text('menu.prefs')</h1>
+#bundle()
+<div class="widget-box nomargin">
+    <div class="widget-title">
+        <span class="icon">
+            <i class="fa fa-table"></i>
+        </span>
+        <h5>#text('menu.prefs')</h5>
+    </div>
+    <div class="widget-content nopadding">
+        <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th class="rownum"></th>
+                <th class="ops"></th>
+                <th class="filtered-input">#text('prefs.key')</th>
+                <th>#text('prefs.value')</th>
+                <th>#text('prefs.desc')</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th></th>
+                <th class="nopadding form-group has-feedback filtered-input">
+                    <input type="text" class="fill form-control no-border">
+                    <span class="form-control-feedback"><i class="fa fa-filter"></i></span>
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>#</td>
+                <td>operations</td>
+                <td>key</td>
+                <td>value</td>
+                <td>description</td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+</div>
 #end
+#end
+</div>
