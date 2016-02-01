@@ -9,6 +9,7 @@ import java.net.URLClassLoader;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.util.Stack;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -150,17 +151,47 @@ extends Directive {
 
 	private String getBundleName(InternalContextAdapter ctx, Node n) {
 		//TODO Retrieve bundle to current template.
+		String defBundle = getDefaultBundleName(ctx);
 		if (n.jjtGetNumChildren() < 2) {
 			// 获取默认资源
-			String bundleName = pathToBundleName(ctx.getCurrentTemplateName());
-			logger.trace("No bundle name specified in directive. Using full path: {}", bundleName);
-			return bundleName;
+			return defBundle;
 		} else {
 			SimpleNode nbundle = (SimpleNode) n.jjtGetChild(0);
 			String bundleName = (String) nbundle.value(ctx);
-			logger.trace("Bundle name specified in directive: {}", bundleName);
-			return bundleName;
+			if (bundleName == null || bundleName.isEmpty())
+				return defBundle;
+			return combineBundleName(bundleName, defBundle);
 		}
+	}
+
+	private String combineBundleName(String bundleName, String defBundle) {
+		logger.trace("Bundle name specified in directive: {}, default bundle: {}", bundleName, defBundle);
+		if (bundleName.startsWith("/")) return bundleName.substring(1);
+		Stack<String> bps = new Stack<String>();
+		for (String p: defBundle.split("/")) {
+			bps.push(p);
+		}
+		bps.pop();
+		for (String p: bundleName.split("/")) {
+			if (p.equals("..")) {
+				if (!p.isEmpty())
+					bps.pop();
+			} else if (!p.equals(".")) {
+				bps.push(p);
+			}
+		}
+		StringBuilder buff = new StringBuilder();
+		for (String p: bps) {
+			if (buff.length() > 0) buff.append("/");
+			buff.append(p);
+		}
+		return buff.toString();
+	}
+
+	private String getDefaultBundleName(InternalContextAdapter ctx) {
+		String bundleName = pathToBundleName(ctx.getCurrentTemplateName());
+		logger.trace("No bundle name specified in directive. Using full path: {}", bundleName);
+		return bundleName;
 	}
 
 	private String pathToBundleName(String bundleName) {
