@@ -14,8 +14,6 @@ public class Preference {
 	private String value;
 	@Column("descriptions") @ColDefine(width=200)
 	private String description;
-	@Column("pref_ns") @ColDefine(update=false, width=200)
-	private String namespace;
 
 	public String getKey() {
 		return key;
@@ -39,13 +37,5 @@ public class Preference {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public String getNamespace() {
-		return namespace;
-	}
-
-	public void setNamespace(String namespace) {
-		this.namespace = namespace;
 	}
 }

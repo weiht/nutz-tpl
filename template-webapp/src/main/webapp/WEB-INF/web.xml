@@ -7,6 +7,17 @@
         <welcome-file>index.html</welcome-file>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+    
+    <context-param>
+        <param-name>tpl-startup-runners</param-name>
+        <param-value>
+            coreDataStartupRunner
+        </param-value>
+    </context-param>
+    
+    <listener>
+        <listener-class>tpl.nutz.web.TplWebContextListener</listener-class>
+    </listener>
 
     <filter>
        <filter-name>api</filter-name>

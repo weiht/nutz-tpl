@@ -36,4 +36,12 @@ var ioc = {
             }
         }
     },
+    "coreDataStartupRunner": {
+    	"type": "tpl.nutz.DataTablesInitializer",
+        "fields" : {
+            "dao" : {
+            	"refer": "coreDao"
+            }
+        }
+    }
 };

@@ -10,6 +10,9 @@ var ioc = {
 	"api.preferencesModule": {
 		"type": "tpl.admin.api.prefs.PreferencesModule",
 		"fields": {
+			"dao": {
+				"refer": "coreDao"
+			}
 		}
 	}
 };
