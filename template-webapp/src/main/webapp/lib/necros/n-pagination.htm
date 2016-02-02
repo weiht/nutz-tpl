@@ -1,0 +1,42 @@
+<div ng-if="!!pagination && !!pagination.exception" ng-bind="pagination.exception" class="text-warning pull-left page-label"></div>
+<div ng-if="!!pagination && !pagination.exception && !pagination.recordCount" class="text-info pull-left page-label" ng-bind="config.messages.notFound"></div>
+<div ng-if="!pagination" class="text-info pull-left page-label" ng-bind="config.messages.noQuery"></div>
+<div ng-if="!!pagination && !!pagination.recordCount" ng-bind-template="{{config.messages.recordCount.before}}{{pagination.recordCount}}{{config.messages.recordCount.after}}" class="pull-left page-label"></div>
+<span ng-if="config.pageSizeList && config.pageSizeList.length" class="page-size-list-container text-right form-inline">
+    每页显示
+    <select class="page-size-list form-control form-control-sm"
+        ng-options="psi for psi in config.pageSizeList" ng-model="config.pageSize">
+    </select>
+    条
+</span>
+<ul ng-if="!!pagination && !!pagination.recordCount && pagination.pageCount > 1" class="pagination pull-right">
+    <li ng-class="pagination.pageNum <= 1 ? 'disabled' : ''">
+        <span aria-hidden="true" ng-if="pagination.pageNum <= 1">首页</span>
+        <a href="javascript:void(0);" ng-click="goPage(1)" ng-if="pagination.pageNum > 1" aria-label="首页">
+            <span aria-hidden="true">首页</span>
+        </a>
+    </li>
+    <li ng-class="pagination.pageNum <= 1 ? 'disabled' : ''">
+        <span aria-hidden="true" ng-if="pagination.pageNum <= 1">上一页</span>
+        <a href="javascript:void(0);" ng-click="goPage(pagination.pageNum - 1)" ng-if="pagination.pageNum > 1" aria-label="上一页">
+            <span aria-hidden="true">上一页</span>
+        </a>
+    </li>
+    <li ng-repeat="p in pagination|pageList" ng-class="pagination.pageNum == p ? 'disabled' : ''">
+        <span ng-bind="p" ng-if="pagination.pageNum == p"></span>
+        <a href="javascript:void(0);" ng-click="goPage(p)" ng-if="pagination.pageNum != p"><span ng-bind="p"></span></a>
+    </li>
+    <li ng-class="pagination.pageNum >= pagination.pageCount ? 'disabled' : ''">
+        <span aria-hidden="true" ng-if="pagination.pageNum >= pagination.pageCount">下一页</span>
+        <a href="javascript:void(0);" ng-click="goPage(pagination.pageNum + 1)" ng-if="pagination.pageNum < pagination.pageCount" aria-label="下一页">
+            <span aria-hidden="true">下一页</span>
+        </a>
+    </li>
+    <li ng-class="pagination.pageNum >= pagination.pageCount ? 'disabled' : ''">
+        <span aria-hidden="true" ng-if="pagination.pageNum >= pagination.pageCount">尾页</span>
+        <a href="javascript:void(0);" ng-click="goPage(pagination.pageCount)" ng-if="pagination.pageNum < pagination.pageCount" aria-label="尾页">
+            <span aria-hidden="true">尾页</span>
+        </a>
+    </li>
+</ul>
+<div class="clearfix">&nbsp;</div>

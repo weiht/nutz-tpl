@@ -339,9 +339,37 @@ body.matrix {
     margin: 0;
 }
 
+.widget-title .buttons {
+    float: right;
+    margin: 8px 10px 0 0;
+}
+
 .widget-content {
     padding: 15px;
     border-bottom: 1px solid #cdcdcd;
+}
+
+.widget-content .form {
+    margin-top: 20px;
+}
+
+.widget-content .form.form-horizontal .form-group {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.widget-footer {
+	border-right: medium none;
+	border-top: 1px solid #D5D5D5;
+	font-weight: normal;
+	background: #efefef;
+    height: 36px;
+    min-height: 36px;
+}
+
+.widget-footer .buttons {
+    margin: 6px 10px 0 0;
+    text-align: center;
 }
 
 /*
@@ -379,7 +407,12 @@ body.matrix {
 }
 
 .no-padding .table, .nopadding .table {
-    margin-bottom: 0;
+    margin-bottom: 0px;
+}
+
+.no-padding.ui-layout-center .table.table-bordered,
+.nopadding.ui-layout-center .table.table-bordered {
+    border-bottom: 1px solid #D5D5D5;
 }
 
 th.filtered-input {
@@ -420,3 +453,33 @@ input[type="tel"], input[type="color"],
 .alert {
     border-radius: 0px;
 }
+
+.matrix select, .matrix textarea {
+	border-radius: 0px;
+}
+
+/*
+    AngularJS form validations:
+*/
+
+.matrix .form-control.ng-invalid {
+    border-color:#ce5c00;
+}
+
+.matrix .form-control.ng-invalid:focus {
+    -webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(190,92,0,.6);
+    box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(190,92,0,.6)
+}
+
+.matrix .no-ng-invalid .form-control {
+    border-color:#ccc;
+}
+
+.matrix .no-ng-invalid .form-control.ng-invalid:focus {
+    border-color:#66afe9;
+    -webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+}
+/*
+    End of AngularJS form validations
+*/

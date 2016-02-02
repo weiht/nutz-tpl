@@ -54,10 +54,10 @@ window.requireConfig = {
             exports: 'angular',
             deps: ['jquery']
         },
-        'angular/angular-route': {
+        'angular/angular-route.min': {
             deps: ['angular']
         },
-        'angular/angular-resource': {
+        'angular/angular-resource.min': {
             deps: ['angular']
         },
         'ztree': {

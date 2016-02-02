@@ -3,10 +3,11 @@ define([
 	'admin_console/menu.js.html#',
 	'admin_console/sections.js.html#',
     'necros',
-	'matrix'
+	'matrix',
+	'angular/angular-resource.min'
 ], function(ng, mainMenu, allSections) {
 
-var app = ng.module('app', ['necros']);
+var app = ng.module('app', ['necros', 'ngResource']);
 
 app.config(['$controllerProvider', 
             '$compileProvider', '$filterProvider', '$provide',

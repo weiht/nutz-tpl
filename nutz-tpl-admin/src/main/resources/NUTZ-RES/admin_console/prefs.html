@@ -1,14 +1,20 @@
 <div class="fill least-padding auto-scroll" ng-if="!visibleSection">
 #bundle('menu')
 #bundle()
-<div class="widget-box nomargin">
-    <div class="widget-title">
+<div class="widget-box nomargin" n-layout>
+    <div class="widget-title ui-layout-north">
         <span class="icon">
             <i class="fa fa-table"></i>
         </span>
         <h5>#text('menu.prefs')</h5>
+        <div class="buttons">
+            <button class="btn btn-xs btn-success" ng-click="add();">
+                <i class="fa fa-plus"></i>
+                #text('add')
+            </button>
+        </div>
     </div>
-    <div class="widget-content nopadding">
+    <div class="widget-content nopadding ui-layout-center">
         <table class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -22,7 +28,8 @@
                 <th></th>
                 <th></th>
                 <th class="nopadding form-group has-feedback filtered-input">
-                    <input type="text" class="fill form-control no-border">
+                    <input type="text" class="fill form-control no-border" ng-model="cri"
+                        ng-keypress="criKeyPressed($event, cri)"/>
                     <span class="form-control-feedback"><i class="fa fa-filter"></i></span>
                 </th>
                 <th></th>
@@ -30,19 +37,28 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>#</td>
-                <td>operations</td>
-                <td>key</td>
-                <td>value</td>
-                <td>description</td>
+            <tr ng-if="!page.result || !page.result.length">
+                <td colspan="5">#text('nothing')</td>
+            </tr>
+            <tr ng-repeat="pref in page.result" ng-if="page.result && page.result.length">
+                <td ng-bind="$index + 1">#</td>
+                <td>
+                </td>
+                <td ng-bind="pref.key">key</td>
+                <td ng-bind="pref.value">value</td>
+                <td ng-bind="pref.description">description</td>
             </tr>
         </tbody>
         </table>
+    </div>
+    <div class="widget-footer ui-layout-south">
+        <div n-pagination="paginationConfig"
+            pagination-data="page" go-page="goPage" class="pagination-placeholder">&nbsp;</div>
     </div>
 </div>
 #end
 #end
 </div>
-
-<div ng-repeat="sec in sections" n-section="sec" ng-if="sec == visibleSection"></div>
+<div class="fill" ng-form="form">
+    <div class="fill" ng-repeat="sec in sections" n-section="{{sec}}" ng-if="sec == visibleSection"></div>
+</div>

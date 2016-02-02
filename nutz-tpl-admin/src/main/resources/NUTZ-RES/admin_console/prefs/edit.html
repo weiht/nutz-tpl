@@ -1,0 +1,62 @@
+#bundle('/general')
+#bundle()
+<div class="widget-box nomargin" n-layout>
+    <div class="widget-title ui-layout-north">
+        <span class="icon">
+            <i class="fa fa-edit"></i>
+        </span>
+        <h5>#text('admin_console.prefs.edit')</h5>
+    </div>
+    <div class="widget-content nopadding ui-layout-center autoscroll">
+<div class="form form-horizontal">
+    <div class="form-group">
+        <label class="col-sm-2 control-label no-padding-right" for="pref_key">#text('prefs.key.title')</label>
+
+        <div class="col-sm-6">
+            <input type="text" ng-model="editingItem.key"
+                id="pref_key" placeholder="#text('prefs.key.placeholder')"
+                ng-disabled="!editingItem._is_new"
+                class="form-control" required ng-maxlength="50" />
+        </div>
+        <div class="col-sm-4 help-inline">
+            #text('prefs.key.inputhint')
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label no-padding-right" for="pref_value">#text('prefs.value.title')</label>
+
+        <div class="col-sm-6">
+            <textarea ng-model="editingItem.value" id="pref_value" class="form-control" rows="5" ng-maxlength="50"></textarea>
+        </div>
+        <div class="col-sm-4 help-inline">
+            #text('prefs.value.inputhint')
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label no-padding-right" for="pref_desc">#text('prefs.desc.title')</label>
+
+        <div class="col-sm-6">
+            <textarea ng-model="editingItem.description" id="pref_desc" class="form-control" rows="5" ng-maxlength="100"></textarea>
+        </div>
+        <div class="col-sm-4 help-inline">
+            #text('prefs.desc.inputhint')
+        </div>
+    </div>
+</div>
+    </div>
+    <div class="widget-footer ui-layout-south">
+        <div class="buttons">
+	        <button ng-disabled="!form.$valid" class="btn btn-xs btn-success" ng-click="save();">
+	            <i class="fa fa-save"></i>
+	            #text('save')
+	        </button>
+	        &nbsp;
+	        <button class="btn btn-xs btn-default" ng-click="goback();">
+	            <i class="fa fa-reload"></i>
+	            #text('goback')
+	        </button>
+        </div>
+    </div>
+</div>
+#end
+#end

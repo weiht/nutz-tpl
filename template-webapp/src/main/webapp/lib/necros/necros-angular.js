@@ -146,5 +146,42 @@ mod.directive('section', nSectionDef);
 
 // End of section
 
+//Bootstrap pagination
+
+mod.filter('pageList', function() {
+	return function(pagination) {
+		if (!pagination) return;
+		if (!pagination.listFirst || !pagination.listLast) return;
+		var r = [];
+		for (var i = pagination.listFirst; i <= pagination.listLast; i ++) {
+			r.push(i);
+		}
+		return r;
+	};
+});
+
+mod.directive('nPagination', ['$window', function($window) {
+	return {
+		'restrict': 'A',
+		'templateUrl': ($window.contextPath || '') + '/lib/necros/n-pagination.htm',
+		'scope': {
+			'config': '=nPagination',
+			'goPage': '=goPage',
+			'pagination': '=paginationData'
+		},
+		'link': function(scope, element, attr) {
+			scope.$watch('config.pageSize', function(nv, ov) {
+				if (nv == ov) return;
+				if (!nv) return;
+				if (typeof scope.goPage == 'function') {
+					scope.goPage(1, nv);
+				}
+			});
+		}
+	};
+}]);
+
+// End of bootstrap pagination
+
 return mod;
 });
