@@ -1,9 +1,10 @@
 define([
 	'angular',
 	'admin_console/menu.js.html#',
+	'admin_console/sections.js.html#',
     'necros',
 	'matrix'
-], function(ng, mainMenu) {
+], function(ng, mainMenu, allSections) {
 
 var app = ng.module('app', ['necros']);
 
@@ -45,8 +46,13 @@ function addMenuToSections(items, parent, sections) {
 	}
 }
 
+app.sections = allSections;
+
 app.config(['nSectionsProvider', function(sections) {
 	addMenuToSections(mainMenu, null, sections);
+	for (var i = 0; i < allSections.length; i ++) {
+		sections.add(allSections[i]);
+	}
 }]);
 
 app.run(['$rootScope', '$timeout', function($root, $timeout) {

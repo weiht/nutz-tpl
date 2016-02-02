@@ -1,4 +1,4 @@
-<div class="fill least-padding auto-scroll">
+<div class="fill least-padding auto-scroll" ng-if="!visibleSection">
 #bundle('menu')
 #bundle()
 <div class="widget-box nomargin">
@@ -12,7 +12,7 @@
         <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th class="rownum"></th>
+                <th class="rownum">#</th>
                 <th class="ops"></th>
                 <th class="filtered-input">#text('prefs.key')</th>
                 <th>#text('prefs.value')</th>
@@ -44,3 +44,5 @@
 #end
 #end
 </div>
+
+<div ng-repeat="sec in sections" n-section="sec" ng-if="sec == visibleSection"></div>

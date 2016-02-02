@@ -10,5 +10,30 @@ var ioc = {
 		"fields": {
 			"ioc": {"refer": "$ioc"}
 		}
+	},
+	"systemPropertiesSource": {
+		"type": "tpl.config.SystemPropertiesSource",
+	},
+	"corePropertiesFileSource": {
+		"type": "tpl.config.PropertiesFileSource",
+		"args": [["NUTZ-IOC/core-config.properties"]]
+	},
+	"coreConfigSource": {
+		"type": "tpl.config.CompositeSource",
+		"fields": {
+			"sourceList": [{
+				"refer": "systemPropertiesSource"
+			}, {
+				"refer": "corePropertiesFileSource"
+			}]
+		}
 	}
+    "coreConfig" : {
+        "type" : "tpl.config.PlaceholderConfigure",
+        "fields" : {
+            "source" : {
+            	"refer": "coreConfigSource"
+            }
+        }
+    },
 };

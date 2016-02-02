@@ -6,7 +6,7 @@
     </layout>
   </appender>
 
-<!--   <logger name="org.nutz" level="debug"/> -->
+  <logger name="org.nutz" level="debug"/>
 
   <root level="error">
     <appender-ref ref="STDOUT" />
