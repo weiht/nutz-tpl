@@ -50,7 +50,22 @@ app.register.controller('admin_console.prefs',
 		}, function() {
 			alert('保存失败。');
 		});
-	}
+	};
+	$scope.edit = function(pref) {
+		$scope.editingItem = ng.extend({}, pref);
+		$scope.visibleSection = 'admin_console.prefs.edit';
+	};
+	$scope.remove = function(pref) {
+		if (confirm('Remove preference ' + pref.key + '?')) {
+			PreferenceService.remove(pref, {}, function(r) {
+				if (r.stackTrace) {
+					alert(r.detailMessage);
+				} else {
+					$scope.goPage();
+				}
+			});
+		}
+	};
 }]);
 
 });

@@ -17,11 +17,11 @@ app.register.service('core.prefs.service',
 				method: 'PUT'
 			},
 			remove: {
-				url: basePath + '/pref/@key',
+				url: basePath + '/pref/:key',
 				method: 'DELETE'
 			},
 			get: {
-				url: basePath + '/pref/@key',
+				url: basePath + '/pref/:key',
 				method: 'GET'
 			}
 		}

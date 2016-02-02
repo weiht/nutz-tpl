@@ -1,4 +1,4 @@
-<div class="fill least-padding auto-scroll" ng-if="!visibleSection">
+<div class="fill least-padding" ng-if="!visibleSection">
 #bundle('menu')
 #bundle()
 <div class="widget-box nomargin" n-layout>
@@ -14,7 +14,7 @@
             </button>
         </div>
     </div>
-    <div class="widget-content nopadding ui-layout-center">
+    <div class="widget-content nopadding ui-layout-center auto-scroll">
         <table class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -42,7 +42,9 @@
             </tr>
             <tr ng-repeat="pref in page.result" ng-if="page.result && page.result.length">
                 <td ng-bind="$index + 1">#</td>
-                <td>
+                <td class="ops">
+                	<a class="text-primary" href="javascript:void(0)" title="#text('edit')" ng-click="edit(pref)"><i class="fa fa-edit"></i></a>
+                	<a class="text-danger" href="javascript:void(0)" title="#text('remove')" ng-click="remove(pref)"><i class="fa fa-minus"></i></a>
                 </td>
                 <td ng-bind="pref.key">key</td>
                 <td ng-bind="pref.value">value</td>

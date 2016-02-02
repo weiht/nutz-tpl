@@ -341,7 +341,7 @@ body.matrix {
 
 .widget-title .buttons {
     float: right;
-    margin: 8px 10px 0 0;
+    margin: 6px 10px 0 0;
 }
 
 .widget-content {
@@ -434,7 +434,23 @@ th.rownum {
 }
 
 th.ops {
-	width: 70px;
+	width: 100px;
+}
+
+td.ops a>i.fa {
+	width: 22px;
+	font-size: 14px;
+	text-align: center;
+}
+
+.btn-in-grid {
+	margin-top: 2px;
+	text-align: left;
+	width: 100%;
+}
+
+.pagination-placeholder .pagination {
+	margin: 5px;
 }
 
 /*
