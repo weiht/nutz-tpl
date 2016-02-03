@@ -6,9 +6,7 @@ import org.nutz.mvc.adaptor.JsonAdaptor;
 import org.nutz.mvc.annotation.AdaptBy;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.DELETE;
-import org.nutz.mvc.annotation.Fail;
 import org.nutz.mvc.annotation.GET;
-import org.nutz.mvc.annotation.Ok;
 import org.nutz.mvc.annotation.POST;
 import org.nutz.mvc.annotation.PUT;
 
@@ -19,14 +17,12 @@ public class PreferenceModule {
 	private Dao dao;
 	
 	@At("/pref/?")
-	@Ok("json") @Fail("json")
 	@GET
 	public Preference get(String key) {
 		return dao.fetch(Preference.class, key);
 	}
 	
 	@At("/pref")
-	@Ok("json") @Fail("json")
 	@POST
 	@AdaptBy(type=JsonAdaptor.class)
 	public Preference add(Preference pref) {
@@ -39,7 +35,6 @@ public class PreferenceModule {
 	}
 	
 	@At("/pref")
-	@Ok("json") @Fail("json")
 	@PUT
 	@AdaptBy(type=JsonAdaptor.class)
 	public Preference update(Preference pref) {
@@ -55,7 +50,6 @@ public class PreferenceModule {
 	}
 	
 	@At("/pref/?")
-	@Ok("json") @Fail("json")
 	@DELETE
 	public Preference delete(String key) {
 		Preference origin = dao.fetch(Preference.class, key);

@@ -6,8 +6,6 @@ import org.nutz.dao.pager.Pager;
 import org.nutz.dao.util.cri.SimpleCriteria;
 import org.nutz.ioc.annotation.InjectName;
 import org.nutz.mvc.annotation.At;
-import org.nutz.mvc.annotation.Fail;
-import org.nutz.mvc.annotation.Ok;
 import org.nutz.mvc.annotation.Param;
 
 import tpl.nutz.Pagination;
@@ -25,7 +23,6 @@ public class PreferencesModule {
 	}
 	
 	@At("/page")
-	@Ok("json") @Fail("json")
 	public Pagination<Preference> page(@Param("cri") String cri, @Param("..") Pagination<Preference> page) {
 		String partialKey = cri == null ? "" : cri;
 		SimpleCriteria criteria = createCriteria();
