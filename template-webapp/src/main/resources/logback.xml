@@ -6,7 +6,8 @@
     </layout>
   </appender>
 
-  <logger name="org.nutz" level="debug"/>
+<!--   <logger name="org.nutz" level="debug"/> -->
+<!--   <logger name="org.apache.shiro" level="trace"/> -->
 
   <root level="error">
     <appender-ref ref="STDOUT" />

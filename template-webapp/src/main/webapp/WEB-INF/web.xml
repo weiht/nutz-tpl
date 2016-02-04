@@ -12,12 +12,30 @@
         <param-name>tpl-startup-runners</param-name>
         <param-value>
             coreDataStartupRunner
+            administrativeAccountStartupChecker
         </param-value>
     </context-param>
     
     <listener>
         <listener-class>tpl.nutz.web.TplWebContextListener</listener-class>
     </listener>
+
+<!-- 	<listener> -->
+<!-- 	    <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class> -->
+<!-- 	</listener> -->
+     
+    <filter>
+        <filter-name>shiroAdminFilter</filter-name>
+        <filter-class>tpl.nutz.web.NutzDelegatingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>shiroAdminFilter</filter-name>
+        <url-pattern>/admin_console/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>shiroAdminFilter</filter-name>
+        <url-pattern>/s/admin_console/*</url-pattern>
+    </filter-mapping>
 
     <filter>
        <filter-name>api</filter-name>

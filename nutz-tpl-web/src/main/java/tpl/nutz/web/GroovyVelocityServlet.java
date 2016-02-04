@@ -25,6 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import tpl.groovy.GroovyConfig;
+import tpl.nutz.TplJsonIocProvider;
 import tpl.velocity.VelocityConfig;
 
 public class GroovyVelocityServlet

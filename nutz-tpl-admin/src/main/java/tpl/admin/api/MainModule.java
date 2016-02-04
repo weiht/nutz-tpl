@@ -6,7 +6,7 @@ import org.nutz.mvc.annotation.IocBy;
 import org.nutz.mvc.annotation.Modules;
 import org.nutz.mvc.annotation.Ok;
 
-import tpl.nutz.web.TplJsonIocProvider;
+import tpl.nutz.TplJsonIocProvider;
 
 @Modules(packages={"tpl.admin.api"})
 @IocBy(type=TplJsonIocProvider.class, args={

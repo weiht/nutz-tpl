@@ -43,5 +43,13 @@ var ioc = {
             	"refer": "coreDao"
             }
         }
+    },
+    "administrativeAccountStartupChecker": {
+    	"type": "tpl.shiro.AdministrativeAccountStartupChecker",
+        "fields" : {
+            "dao" : {
+            	"refer": "coreDao"
+            }
+        }
     }
 };

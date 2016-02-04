@@ -1,4 +1,4 @@
-package tpl.nutz.web;
+package tpl.nutz;
 
 import org.nutz.ioc.Ioc;
 import org.nutz.ioc.Ioc2;

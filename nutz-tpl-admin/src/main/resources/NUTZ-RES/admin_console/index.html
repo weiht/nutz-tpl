@@ -13,7 +13,9 @@
   <div class="pane ui-layout-center" style="position:absolute;top:0px;left:220px;width:100%">
     <div id="top-nav" class="navbar navbar-inverse pull-left">
       <ul class="nav">
-        <li><a>Home</a></li>
+        <li><a><i class="fa fa-user"></i> $shiro.principal</a></li>
+        <li><a><i class="fa fa-key"></i> #text('change_password')</a></li>
+        <li><a href="${request.contextPath}/admin_console/logout.html"><i class="fa fa-sign-out"></i> #text('logout')</a></li>
       </ul>
     </div>
     <div class="clearfix"></div>

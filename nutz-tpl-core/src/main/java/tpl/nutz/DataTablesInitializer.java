@@ -10,8 +10,9 @@ implements Runnable {
 	
 	@Override
 	public void run() {
-		dao.create(Preference.class, false);
-		//Daos.migration(dao, Preference.class, true, false);
+		if (!dao.exists(Preference.class))
+			dao.create(Preference.class, false);
+		//else Daos.migration(dao, Preference.class, true, false);
 	}
 
 	public void setDao(Dao dao) {
