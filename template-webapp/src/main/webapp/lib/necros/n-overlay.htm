@@ -1,0 +1,27 @@
+<div class="modal overlay" tabindex="-1" role="dialog" aria-hidden="true"
+	ng-class="modal.dialogClass"
+	ng-style="!!modal.visible ? {display: 'block'} : {display:'none'}"
+	ng-controller="bs.modal.ctrl" ng-init="watchModal(modal)">
+	<div class="modal-dialog modal-sm modal-overlay" ng-form="form">
+		<div class="modal-content">
+			<div class="modal-header" v-size>
+				<button type="button" class="close" ng-click="modal.visible = false"><i class="fa fa-close"></i></button>
+				<span style="font-size: 14px;" class="blue"> <i ng-class="modal.iconClass || ''"></i>&nbsp;
+					<span ng-bind="modal.title"></span>
+				</span>
+			</div>
+			<div class="modal-body text-left auto-scroll" v-autoscroll>
+				<div ng-if="!!modal.viewHtml" ng-bind-html="modal.viewHtml"></div>
+				<div ng-if="!!modal.view" n-section="{{modal.view}}"></div>
+			</div>
+			<div class="modal-footer no-margin" v-size ng-if="modal.buttons && modal.buttons.length">
+				<a ng-repeat="_btn in modal.buttons" href="javascript:void(0)"
+					class="btn" ng-class="_btn.buttonClass"
+					ng-disabled="!!_btn.disableOnInvalid && form.$invalid"
+					ng-click="_btn.onclick&&_btn.onclick(form)">
+					<i ng-class="_btn.iconClass"></i> <span ng-bind="_btn.text"></span>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>

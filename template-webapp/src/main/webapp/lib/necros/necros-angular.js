@@ -146,6 +146,209 @@ mod.directive('section', nSectionDef);
 
 // End of section
 
+//Bootstrap modal (dialog)
+
+mod.service('modalService', ['$sce', function($sce) {
+	var dialogs = [];
+	function isVisible() {
+		for (var i = 0; i < dialogs.length; i ++) {
+			if (!!dialogs[i].visible) return true;
+		}
+		return false;
+	}
+	function addDialog(modalDialog, scope) {
+		var dlg = modalDialog, found = null;
+		if (scope) dlg.__scope = scope;
+		var dlgs = dialogs;
+		for (var i = 0; i < dlgs.length; i ++) {
+			if (dlg == dlgs[i]) {
+				found = dlg;
+				break;
+			}
+		}
+		if (!found) dialogs.push(dlg);
+	}
+	return {
+		'modalDialogs': dialogs,
+		'addDialog': addDialog,
+		'visible': isVisible
+	};
+}]);
+
+mod.controller('bs.modal.ctrl', ['$scope', '$rootScope', function($scope, $root) {
+	$scope.$watch('modal.visible', function(nv, ov) {
+		if (!$scope.modal) return;
+		if (!$scope.modal.__element) return;
+		if (nv === true) {
+			$root.$broadcast('shown.bs.modal', $scope.modal);
+		} else if (nv === false) {
+			$root.$broadcast('hidden.bs.modal', $scope.modal);
+		}
+	});
+	
+	$scope.watchModal = function(modal) {
+		$scope.modal = modal;
+	};
+}]);
+
+mod.service('dialogService', ['$sce', 'modalService', function($sce, modalService) {
+	var addDialog = modalService.addDialog;
+	var alertTemplate = '<table><tr><td align="center" class="icon-big-edit">&nbsp;</td><td valign="middle" id="alertMessage">{{msg}}</td></tr></table>';
+	var alertDialog = {
+		'dialogClass': 'framework-dialog alert-dialog',
+		'iconClass': 'fa fa-exclamation-circle',
+		'title': '警告',
+		'viewHtml': alertTemplate,
+		'buttons': [{
+			'buttonClass': 'btn-default',
+			'iconClass': 'fa fa-close',
+			'text': '关闭',
+			'onclick': function() {
+				alertDialog.visible = false;
+				if (typeof alertDialog.callback == 'function') {
+					alertDialog.callback();
+				}
+			}
+		}]
+	};
+	var confirmTemplate = '<table><tr><td align="center" class="icon-big-edit">&nbsp;</td><td valign="middle" id="confirmMessage">{{msg}}</td></tr></table>';
+	var confirmDialog = {
+		'dialogClass': 'framework-dialog confirm-dialog',
+		'iconClass': 'fa fa-question-circle',
+		'title': '确认',
+		'viewHtml': confirmTemplate,
+		'buttons': [{
+			'buttonClass': 'btn-primary',
+			'iconClass': 'fa fa-check',
+			'text': '确定',
+			'onclick': function() {
+				confirmDialog.visible = false;
+				if (typeof confirmDialog.okCallback == 'function') {
+					confirmDialog.okCallback(true);
+				}
+			}
+		}, {
+			'buttonClass': 'btn-default',
+			'text': '取消',
+			'onclick': function() {
+				confirmDialog.visible = false;
+				if (typeof confirmDialog.cancelCallback == 'function') {
+					confirmDialog.cancelCallback(false);
+				} else if (typeof confirmDialog.okCallback == 'function') {
+					confirmDialog.okCallback(false);
+				}
+			}
+		}]
+	};
+	function alert(title, msg, callback) {
+		addDialog(alertDialog);
+		angular.extend(alertDialog, {
+			'title': title,
+			'viewHtml': $sce.trustAsHtml(alertTemplate.replace(/\{\{\msg}\}/, msg)),
+			'callback': callback,
+			'visible': true
+		});
+	}
+	function confirm(title, msg, okCallback, cancelCallback) {
+		addDialog(confirmDialog);
+		angular.extend(confirmDialog, {
+			'title': title,
+			'viewHtml': $sce.trustAsHtml(confirmTemplate.replace(/\{\{msg\}\}/, msg)),
+			'okCallback': okCallback,
+			'cancelCallback': cancelCallback,
+			'visible': true
+		});
+	}
+	return {
+		'alert': alert,
+		'confirm': confirm
+	};
+}]);
+
+mod.directive('nModalPlaceholder', ['modalService', function(svc, section) {
+	return {
+		'restrict': 'A',
+		'template': '<div ng-repeat="dlg in modals" bs-modal="dlg"></div><div class="modal-backdrop in" ng-if="modalService.visible()"></div>',
+		'link': function(scope, element, attr) {
+			scope.modals = svc.modalDialogs;
+			scope.modalService = svc;
+		}
+	};
+}]);
+
+var modalTemplate = {
+	showTemplate: function(template, scope, element, $compile) {
+		element.html(template);
+		$compile(element.contents())(scope);
+	}
+};
+
+var modalDef = ['modalService', '$window', '$compile', '$http', '$templateCache', function(svc, $window, $compile, $http, $templateCache) {
+	return {
+		'restrict': 'A',
+		'link': function(scope, element, attr) {
+			var modal = scope.$eval(attr.bsModal);
+			modal.__element = element;
+			var $scope = (modal.__scope || scope).$new();
+			$scope.modal = modal;
+			var template = modal.overlay ? 'overlay' : 'modal';
+			if (modalTemplate[template]) {
+				modalTemplate.showTemplate(modalTemplate[template], $scope, element, $compile);
+			} else {
+				$http.get(($window.contextPath  || '') + '/lib/necros/n-' + template + '.htm', {cache: $templateCache})
+					.success(function(tpl) {
+						modalTemplate[template] = tpl;
+						modalTemplate.showTemplate(tpl, $scope, element, $compile);
+					});
+			}
+			$compile(element.contents())($scope);
+		}
+	};
+}];
+
+mod.directive('bsModal', modalDef);
+mod.directive('nModal', ['modalService', function(svc) {
+	return {
+		'restrict': 'A',
+		'link': function(scope, element, attr) {
+			var modal = scope.$eval(attr.nModal);
+			if (!modal) return;
+			if (attr.title) modal.title = attr.title;
+			if (attr.buttons) modal.buttons = scope.$eval(attr.buttons);
+			if (!modal) return;
+			modal.__scope = scope;
+			if (modal) {
+				svc.addDialog(modal);
+			}
+		}
+	}
+}]);
+
+function isInModal(el) {
+	function im(e) {
+		if (e.length == 0 || e[0] == document) return null;
+		if (e.hasClass('modal')) {
+			return e;
+		}
+		return im(e.parent());
+	}
+	var m = el.data('__modal');
+	if (typeof m == 'undefined') {
+		m = im(el);
+		el.data('__modal', m);
+		return m;
+	} else {
+		return m;
+	}
+}
+
+function modalIsDirective(modal) {
+	var pm = modal.parent();
+	return pm.attr('bs-modal') || pm.attr('bsModal');
+}
+
+// End of bootstrap modal
+
 //Bootstrap pagination
 
 mod.filter('pageList', function() {
@@ -182,6 +385,24 @@ mod.directive('nPagination', ['$window', function($window) {
 }]);
 
 // End of bootstrap pagination
+
+//Form validation
+mod.directive('validIf', [function() {
+	return {
+		restrict: 'A',
+		scope: {
+			expr: '=validIf'
+		},
+		require: 'ngModel',
+		link: function(scope, element, attrs, ngModel) {
+			console.log(ngModel)
+			scope.$watch('expr', function(nv, ov) {
+				ngModel.$setValidity(attrs.validIf, !!nv);
+			});
+		}
+	};
+}]);
+//End of form validation
 
 return mod;
 });

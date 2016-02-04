@@ -6,15 +6,16 @@
 <title>#text('title')</title>
 </head>
 <body class="matrix" n-layout="{west:{size:220},north:{size:77}}">
-<div id="header" class="pane ui-layout-north" n-layout="{west:{size:220}}">
+<div id="header" class="pane ui-layout-north" n-layout="{west:{size:220}}" ng-controller="admin_console.header">
   <div class="pane ui-layout-west pull-left" style="width:220px;">
     <h1><a href="index.html">#text('title')</a></h1>
   </div>
   <div class="pane ui-layout-center" style="position:absolute;top:0px;left:220px;width:100%">
+<div n-modal="changePasswordDialog" title="#text('changepassword')" buttons="[{text: '#text('save')',buttonClass:'btn-sm btn-primary',disableOnInvalid:true,onclick:savePassword,iconClass:'fa fa-save'}]"></div>
     <div id="top-nav" class="navbar navbar-inverse pull-left">
       <ul class="nav">
         <li><a><i class="fa fa-user"></i> $shiro.principal</a></li>
-        <li><a><i class="fa fa-key"></i> #text('change_password')</a></li>
+        <li><a href="javascript:void(0);" ng-click="showChangePassword();"><i class="fa fa-key"></i> #text('change_password')</a></li>
         <li><a href="${request.contextPath}/admin_console/logout.html"><i class="fa fa-sign-out"></i> #text('logout')</a></li>
       </ul>
     </div>
@@ -92,11 +93,12 @@
 <!--sidebar-menu-->
 
 <!--main-container-part-->
-<div id="workbench" class="pane ui-layout-center">
+<div id="workbench" class="pane ui-layout-center most-padding">
   <div class="fill" n-section="{{workbenchSection||'workbench.home'}}">
   </div>
 </div>
 
+<div n-modal-placeholder></div>
 #parse('inc/scripts.html')
 <script src="${request.contextPath}/lib/require/require.js" data-main="${request.contextPath}/s/admin_console/main.js"></script>
 </body>

@@ -56,6 +56,17 @@ app.config(['nSectionsProvider', function(sections) {
 	}
 }]);
 
+app.controller('admin_console.header', ['$scope', function($scope) {
+	$scope.changePasswordDialog = {
+		'view': 'admin_console.change_password',
+		'width': 600
+	};
+	$scope.showChangePassword = function() {
+		$scope.changePassword = {};
+		$scope.changePasswordDialog.visible = true;
+	};
+}]);
+
 app.run(['$rootScope', '$timeout', function($root, $timeout) {
 	$root.workbenchSection = 'admin_console.home';
 	$root.breadcrumb = [homeSection];

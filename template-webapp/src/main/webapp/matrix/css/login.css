@@ -66,6 +66,10 @@ body { background-color:#2E363F;    padding: 0;    margin-top:10%;}
 #loginbox .form-group{ padding:8px 0; margin-bottom:0px;}
 }
 
+.main_input_box .input-group {
+	width: 100%;
+}
+
 .main_input_box .input-group-addon {
 	border-radius: 0px;
 	padding: 9px;

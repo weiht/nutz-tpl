@@ -317,6 +317,11 @@ body.matrix {
     position: relative;
 }
 
+.modal-header {
+    height: auto;
+    padding: 8px 15px 5px;
+}
+
 .widget-title, .modal-header, .table th, div.dataTables_wrapper .ui-widget-header {
     background: #efefef;
     border-bottom: 1px solid #CDCDCD;
@@ -360,7 +365,7 @@ body.matrix {
 
 .widget-footer {
 	border-right: medium none;
-	border-top: 1px solid #D5D5D5;
+	border-bottom: 1px solid #D5D5D5;
 	font-weight: normal;
 	background: #efefef;
     height: 36px;
@@ -495,6 +500,11 @@ input[type="tel"], input[type="color"],
     border-color:#66afe9;
     -webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
     box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+}
+
+.matrix .modal .form-group {
+	margin-left: 0px;
+	margin-right: 0px;
 }
 /*
     End of AngularJS form validations

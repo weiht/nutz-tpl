@@ -94,14 +94,14 @@ extends Directive {
 
 	private InternalContextAdapter loadClasspathBundles(InternalContextAdapter ctx,
 			String bundleName, Locale lc) {
-		ResourceBundle bundle = ResourceBundle.getBundle(viewConfig.getResourceLocation() + "." + bundleName, lc);
+		ResourceBundle bundle = ResourceBundle.getBundle(viewConfig.getResourceLocation() + "/" + bundleName, lc);
 		return wrapBundle(ctx, bundle);
 	}
 
 	private InternalContextAdapter loadMixedBundles(InternalContextAdapter ctx,
 			String bundleName, Locale lc, File[] repos) {
 		ClassLoader cloader = ensureLoader(ctx, repos);
-		ResourceBundle bundle = ResourceBundle.getBundle(viewConfig.getResourceLocation() + "." + bundleName, lc, cloader);
+		ResourceBundle bundle = ResourceBundle.getBundle(viewConfig.getResourceLocation() + "/" + bundleName, lc, cloader);
 		return wrapBundle(ctx, bundle);
 	}
 	
