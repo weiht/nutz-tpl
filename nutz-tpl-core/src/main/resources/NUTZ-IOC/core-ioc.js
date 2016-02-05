@@ -8,7 +8,8 @@ var ioc = {
 	"groovyConfig": {
 		"type": "tpl.groovy.GroovyConfig",
 		"fields": {
-			"ioc": {"refer": "$ioc"}
+			"ioc": {"refer": "$ioc"},
+			"resourceLocation": ""
 		}
 	},
 	"systemPropertiesSource": {
