@@ -14,5 +14,13 @@ var ioc = {
 				"refer": "coreDao"
 			}
 		}
+	},
+	"api.passwordModule": {
+		"type": "tpl.admin.api.authc.PasswordModule",
+		"fields": {
+			"dao": {
+				"refer": "coreDao"
+			}
+		}
 	}
 };

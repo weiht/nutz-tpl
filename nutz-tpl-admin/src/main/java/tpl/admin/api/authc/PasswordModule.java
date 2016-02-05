@@ -5,7 +5,6 @@ import java.util.Map;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.crypto.hash.Sha512Hash;
 import org.nutz.dao.Dao;
 import org.nutz.ioc.annotation.InjectName;
@@ -23,7 +22,7 @@ public class PasswordModule {
 	@At("/authc/chpwd")
 	@POST
 	@AdaptBy(type=JsonAdaptor.class)
-	public void changePassword(Map<String, String> passwords) {
+	public String changePassword(Map<String, String> passwords) {
 		String
 			oldPassword = passwords.get("oldPassword"),
 			newPassword = passwords.get("newPassword");
@@ -32,13 +31,14 @@ public class PasswordModule {
 		//TODO Inject a hash algorithm
 		Sha512Hash hash = new Sha512Hash(oldPassword, ai.getPasswordSalt(), 2000);
 		if (!hash.toString().equals(ai.getLoginPassword()))
-			throw new IncorrectCredentialsException(uid);
+			throw new IncorrectCredentialsException("Invalid password for: " + uid);
 		//TODO Inject salt length
 		String salt = RandomStringUtils.random(10);
 		ai.setPasswordSalt(salt);
 		hash = new Sha512Hash(newPassword, ai.getPasswordSalt(), 2000);
 		ai.setLoginPassword(hash.toString());
 		dao.update(ai);
+		return ai.getLoginName();
 	}
 
 	public void setDao(Dao dao) {

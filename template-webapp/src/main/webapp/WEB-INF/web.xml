@@ -36,6 +36,10 @@
         <filter-name>shiroAdminFilter</filter-name>
         <url-pattern>/s/admin_console/*</url-pattern>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>shiroAdminFilter</filter-name>
+        <url-pattern>/api/admin_console/*</url-pattern>
+    </filter-mapping>
 
     <filter>
        <filter-name>api</filter-name>

@@ -56,7 +56,7 @@ app.config(['nSectionsProvider', function(sections) {
 	}
 }]);
 
-app.controller('admin_console.header', ['$scope', function($scope) {
+app.controller('admin_console.header', ['$scope', '$resource', function($scope, $resource) {
 	$scope.changePasswordDialog = {
 		'view': 'admin_console.change_password',
 		'width': 600
@@ -64,6 +64,20 @@ app.controller('admin_console.header', ['$scope', function($scope) {
 	$scope.showChangePassword = function() {
 		$scope.changePassword = {};
 		$scope.changePasswordDialog.visible = true;
+	};
+	var PasswordService = $resource(window.contextPath + '/api/admin_console/authc/chpwd', {}, {
+		change: {
+			method: "POST"
+		}
+	});
+	$scope.savePassword = function() {
+		PasswordService.change({}, $scope.changePassword, function(r) {
+			if (r.stackTrace) {
+				alert(r.detailMessage);
+			} else {
+				$scope.changePasswordDialog.visible = false;
+			}
+		});
 	};
 }]);
 
