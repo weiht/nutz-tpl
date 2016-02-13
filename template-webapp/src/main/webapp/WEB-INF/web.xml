@@ -12,6 +12,7 @@
         <param-name>tpl-startup-runners</param-name>
         <param-value>
             coreDataStartupRunner
+            extraDaoInitializer
             administrativeAccountStartupChecker
         </param-value>
     </context-param>

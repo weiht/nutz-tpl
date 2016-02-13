@@ -45,6 +45,28 @@ var ioc = {
             }
         }
     },
+    "coreDataSourceManager": {
+    	"type": "tpl.ds.NutzDataSourceManager",
+        "fields" : {
+            "dao" : {
+            	"refer": "coreDao"
+            },
+            "ioc": {
+            	"refer": "$ioc"
+            }
+        }
+    },
+    "extraDaoInitializer": {
+    	"type": "tpl.ds.ExtraDaoInitializer",
+        "fields" : {
+            "dao" : {
+            	"refer": "coreDao"
+            },
+            "ioc": {
+            	"refer": "$ioc"
+            }
+        }
+    },
     "administrativeAccountStartupChecker": {
     	"type": "tpl.shiro.AdministrativeAccountStartupChecker",
         "fields" : {

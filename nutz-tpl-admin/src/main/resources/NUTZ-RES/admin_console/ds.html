@@ -1,0 +1,55 @@
+<div class="fill least-padding" ng-if="!visibleSection">
+#bundle('menu')
+#bundle()
+<div class="widget-box nomargin" n-layout>
+    <div class="widget-title ui-layout-north">
+        <span class="icon">
+            <i class="fa fa-table"></i>
+        </span>
+        <h5>#text('menu.ds')</h5>
+        <div class="buttons">
+            <button class="btn btn-xs btn-success" ng-click="add();">
+                <i class="fa fa-plus"></i>
+                #text('add')
+            </button>
+        </div>
+    </div>
+    <div class="widget-content nopadding ui-layout-center auto-scroll">
+        <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th class="rownum">#</th>
+                <th class="ops"></th>
+                <th>#text('ds.name')</th>
+                <th>#text('ds.url')</th>
+                <th>#text('ds.user')</th>
+                <th>#text('ds.password')</th>
+                <th>#text('ds.description')</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-if="!ds.result || !ds.result.length">
+                <td colspan="5">#text('nothing')</td>
+            </tr>
+            <tr ng-repeat="ds in ds.result" ng-if="ds.result && ds.result.length">
+                <td ng-bind="$index + 1">#</td>
+                <td class="ops">
+                	<a class="text-primary" href="javascript:void(0)" title="#text('edit')" ng-click="edit(ds)"><i class="fa fa-edit"></i></a>
+                	<a class="text-danger" href="javascript:void(0)" title="#text('remove')" ng-click="remove(ds)"><i class="fa fa-minus"></i></a>
+                </td>
+                <td ng-bind="ds.name">name</td>
+                <td ng-bind="ds.url">url</td>
+                <td ng-bind="ds.user">user</td>
+                <td ng-bind="ds.password">password</td>
+                <td ng-bind="ds.description">description</td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+</div>
+#end
+#end
+</div>
+<div class="fill" ng-form="form">
+    <div class="fill" ng-repeat="sec in sections" n-section="{{sec}}" ng-if="sec == visibleSection"></div>
+</div>
