@@ -6,7 +6,7 @@
     </layout>
   </appender>
 
-  <logger name="tpl.velocity" level="trace"/>
+<!--   <logger name="tpl.velocity" level="trace"/> -->
 <!--   <logger name="org.nutz" level="debug"/> -->
 <!--   <logger name="org.apache.shiro" level="trace"/> -->
 

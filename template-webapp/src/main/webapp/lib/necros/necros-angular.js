@@ -363,6 +363,7 @@ mod.filter('pageList', function() {
 	};
 });
 
+// TODO Pagination html template i18n
 mod.directive('nPagination', ['$window', function($window) {
 	return {
 		'restrict': 'A',
@@ -395,7 +396,6 @@ mod.directive('validIf', [function() {
 		},
 		require: 'ngModel',
 		link: function(scope, element, attrs, ngModel) {
-			console.log(ngModel)
 			scope.$watch('expr', function(nv, ov) {
 				ngModel.$setValidity(attrs.validIf, !!nv);
 			});
