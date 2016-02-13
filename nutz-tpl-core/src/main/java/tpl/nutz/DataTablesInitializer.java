@@ -2,6 +2,7 @@ package tpl.nutz;
 
 import org.nutz.dao.Dao;
 
+import tpl.ds.DataSourceDef;
 import tpl.prefs.Preference;
 
 public class DataTablesInitializer
@@ -10,9 +11,18 @@ implements Runnable {
 	
 	@Override
 	public void run() {
-		if (!dao.exists(Preference.class))
-			dao.create(Preference.class, false);
-		//else Daos.migration(dao, Preference.class, true, false);
+		initTable(Preference.class);
+		initTable(DataSourceDef.class);
+	}
+	
+	private void initTable(Class<?> clazz) {
+		try {
+			if (!dao.exists(clazz))
+				dao.create(clazz, false);
+			//else Daos.migration(dao, clazz, true, false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void setDao(Dao dao) {
