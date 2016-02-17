@@ -22,5 +22,16 @@ var ioc = {
 				"refer": "coreDao"
 			}
 		}
+	},
+	"api.dataSourceModule": {
+		"type": "tpl.admin.api.ds.DataSourceModule",
+		"fields": {
+			"manager": {
+				"refer": "coreDataSourceManager"
+			},
+			"dao": {
+				"refer": "coreDao"
+			}
+		}
 	}
 };

@@ -48,7 +48,7 @@ app.register.controller('admin_console.prefs',
 				$scope.goback();
 			}
 		}, function() {
-			alert('保存失败。');
+			alert('Failure saving item.');
 		});
 	};
 	$scope.edit = function(pref) {

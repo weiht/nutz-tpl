@@ -21,6 +21,7 @@
                 <th class="rownum">#</th>
                 <th class="ops"></th>
                 <th>#text('ds.name')</th>
+                <th>#text('ds.status')</th>
                 <th>#text('ds.url')</th>
                 <th>#text('ds.user')</th>
                 <th>#text('ds.password')</th>
@@ -29,15 +30,18 @@
         </thead>
         <tbody>
             <tr ng-if="!ds.result || !ds.result.length">
-                <td colspan="5">#text('nothing')</td>
+                <td colspan="7">#text('nothing')</td>
             </tr>
-            <tr ng-repeat="ds in ds.result" ng-if="ds.result && ds.result.length">
+            <tr ng-repeat="ds in ds.result">
                 <td ng-bind="$index + 1">#</td>
                 <td class="ops">
                 	<a class="text-primary" href="javascript:void(0)" title="#text('edit')" ng-click="edit(ds)"><i class="fa fa-edit"></i></a>
-                	<a class="text-danger" href="javascript:void(0)" title="#text('remove')" ng-click="remove(ds)"><i class="fa fa-minus"></i></a>
+                    <a class="text-danger" href="javascript:void(0)" title="#text('remove')" ng-click="remove(ds)"><i class="fa fa-minus"></i></a>
+                    <a class="text-danger" ng-if="statuses.isActive(ds)" href="javascript:void(0)" title="#text('deactivate')" ng-click="deactivate(ds)"><i class="fa fa-ban"></i></a>
+                    <a class="text-success" ng-if="!statuses.isActive(ds)" href="javascript:void(0)" title="#text('activate')" ng-click="activate(ds)"><i class="fa fa-check-circle-o"></i></a>
                 </td>
                 <td ng-bind="ds.name">name</td>
+                <td ng-bind="ds.status|dataSourceStatusText" ng-class="statuses.isActive(ds)?'text-success':'text-danger'">active/inactive</td>
                 <td ng-bind="ds.url">url</td>
                 <td ng-bind="ds.user">user</td>
                 <td ng-bind="ds.password">password</td>

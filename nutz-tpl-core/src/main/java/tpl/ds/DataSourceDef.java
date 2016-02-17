@@ -18,9 +18,9 @@ public class DataSourceDef {
 	private String user;
 	@Column("ds_password") @ColDefine(width=200)
 	private String password;
-	@Column("descriptions") @ColDefine(width=200)
+	@Column("ds_descriptions") @ColDefine(width=200)
 	private String description;
-	@Column("descriptions") @ColDefine(notNull=true)
+	@Column("ds_status") @ColDefine(notNull=true)
 	private Integer status;
 
 	public String getName() {
