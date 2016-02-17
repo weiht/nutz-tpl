@@ -56,6 +56,9 @@ var ioc = {
             }
         }
     },
+    "druidDataSourceTemplate": {
+		"type": "com.alibaba.druid.pool.DruidDataSource"
+    },
     "extraDaoInitializer": {
     	"type": "tpl.ds.ExtraDaoInitializer",
         "fields" : {

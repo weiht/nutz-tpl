@@ -2,21 +2,29 @@ package tpl.ds;
 
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
 import org.nutz.dao.util.cri.SimpleCriteria;
 import org.nutz.ioc.Ioc2;
+import org.nutz.ioc.impl.NutIoc;
+
+import tpl.nutz.CompositeIocContext;
 
 public class ExtraDaoInitializer
 implements Runnable {
-	private Ioc2 ioc;
+	private Ioc2 ioc, loaderIoc;
 	private Dao dao;
+	private DaoLoader loader;
 	
 	@Override
 	public void run() {
 		List<DataSourceDef> dsDefs = loadActivatedDataSources();
 		for (DataSourceDef def: dsDefs) {
-			initDao(def);
+			addToContext(def);
+			System.out.println(loaderIoc.get(DataSource.class, def.getName()));
+			System.out.println(loaderIoc.get(Dao.class, def.getName() + "Dao"));
 		}
 	}
 
@@ -27,9 +35,13 @@ implements Runnable {
 		return dsDefs;
 	}
 
-	private void initDao(DataSourceDef def) {
-		// TODO Auto-generated method stub
-		
+	private void addToContext(DataSourceDef dsdef) {
+		if (loader == null) {
+			loader = new DaoLoader();
+			loaderIoc = new NutIoc(loader);
+			((CompositeIocContext)ioc.getIocContext()).addContext(loaderIoc.getIocContext());
+		}
+		loader.add(dsdef, ioc);
 	}
 
 	public void setIoc(Ioc2 ioc) {
