@@ -39,7 +39,7 @@ app.register.controller('admin_console.ds',
 				{}, $scope.editingItem,
 				function(r) {
 			if (r.stackTrace) {
-				alert(r.detailMessage);
+				alert(r.detailMessage || 'Unknown error.');
 			} else {
 				$scope.load();
 				$scope.goback();
@@ -77,6 +77,16 @@ app.register.controller('admin_console.ds',
 				alert(r.detailMessage);
 			} else {
 				$scope.load();
+			}
+		});
+	};
+	
+	$scope.write = function() {
+		DataSourceManager.writeConfig(function(r) {
+			if (r && r.stackTrace) {
+				alert(r.detailMessage);
+			} else {
+				alert('Configuration is written.')
 			}
 		});
 	};

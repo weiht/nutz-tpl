@@ -18,6 +18,9 @@ app.register.service('core.ds.manager',
 				isArray: true,
 				url: basePath + '/inactive'
 			},
+			writeConfig: {
+				method: 'POST'
+			},
 			add: {
 				url: basePath + '/da',
 				method: 'POST'

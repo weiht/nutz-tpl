@@ -1,5 +1,6 @@
 package tpl.admin.api.ds;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.nutz.dao.Cnd;
@@ -52,6 +53,12 @@ public class DataSourceModule {
 	@GET
 	public List<DataSourceDef> all() {
 		return dao.query(DataSourceDef.class, createCriteria());
+	}
+	
+	@At("/ds/")
+	@POST
+	public void write() throws IOException {
+		manager.writeConfig();
 	}
 	
 	@At("/ds/active")

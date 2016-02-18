@@ -1,10 +1,5 @@
 package tpl.nutz.web;
 
-import groovy.lang.Binding;
-import groovy.util.ResourceException;
-import groovy.util.ScriptException;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -24,6 +19,9 @@ import org.nutz.mvc.Mvcs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import groovy.lang.Binding;
+import groovy.util.ResourceException;
+import groovy.util.ScriptException;
 import tpl.groovy.GroovyConfig;
 import tpl.nutz.TplJsonIocProvider;
 import tpl.velocity.VelocityConfig;

@@ -53,20 +53,12 @@ var ioc = {
             },
             "ioc": {
             	"refer": "$ioc"
-            }
-        }
-    },
-    "druidDataSourceTemplate": {
-		"type": "com.alibaba.druid.pool.DruidDataSource"
-    },
-    "extraDaoInitializer": {
-    	"type": "tpl.ds.ExtraDaoInitializer",
-        "fields" : {
-            "dao" : {
-            	"refer": "coreDao"
             },
-            "ioc": {
-            	"refer": "$ioc"
+            "config": {
+            	"refer": "coreConfig"
+            },
+            "velocityConfig": {
+            	"refer": "velocityConfig"
             }
         }
     },
