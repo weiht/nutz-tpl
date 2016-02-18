@@ -2,8 +2,6 @@ package tpl.ds;
 
 import java.util.List;
 
-import javax.sql.DataSource;
-
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
 import org.nutz.dao.util.cri.SimpleCriteria;
@@ -23,8 +21,6 @@ implements Runnable {
 		List<DataSourceDef> dsDefs = loadActivatedDataSources();
 		for (DataSourceDef def: dsDefs) {
 			addToContext(def);
-			System.out.println(loaderIoc.get(DataSource.class, def.getName()));
-			System.out.println(loaderIoc.get(Dao.class, def.getName() + "Dao"));
 		}
 	}
 
