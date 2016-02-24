@@ -6,7 +6,7 @@ import org.nutz.mvc.annotation.Views;
 
 import tpl.nutz.TplJsonIocProvider;
 
-@Modules(packages={"tpl.nutz.web.modules"})
+@Modules(packages={"tpl.webmods"})
 @IocBy(type=TplJsonIocProvider.class, args={
 	"NUTZ-MVC"
 })

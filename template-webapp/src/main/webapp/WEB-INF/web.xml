@@ -53,6 +53,19 @@
        <filter-name>api</filter-name>
        <url-pattern>/api/*</url-pattern>
     </filter-mapping>
+
+    <filter>
+       <filter-name>web</filter-name>
+       <filter-class>org.nutz.mvc.NutFilter</filter-class>
+       <init-param>
+           <param-name>modules</param-name>
+           <param-value>tpl.nutz.web.MainModule</param-value>
+       </init-param>
+    </filter>
+    <filter-mapping>
+       <filter-name>web</filter-name>
+       <url-pattern>/attachments/*</url-pattern>
+    </filter-mapping>
 	
 	<servlet>
 	   <servlet-name>groovyServlet</servlet-name>

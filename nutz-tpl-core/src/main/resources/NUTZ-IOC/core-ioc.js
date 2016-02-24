@@ -69,5 +69,13 @@ var ioc = {
             	"refer": "coreDao"
             }
         }
+    },
+    "attachmentManager": {
+    	"type": "tpl.res.AttachmentManager",
+    	"fields": {
+    		"rootPath": {
+    			"java": "$coreConfig.get('attachments.rootpath')"
+    		}
+    	}
     }
 };
