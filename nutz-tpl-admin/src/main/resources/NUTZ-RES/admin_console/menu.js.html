@@ -24,6 +24,25 @@ var mainMenu = [{
     templateUrl: window.contextPath + '/admin_console/ds.html',
     requireModule: 's/admin_console/ds',
     controller: 'admin_console.ds'
+}, {
+    name: 'admin_console.res',
+    text: '#text('menu.res')',
+    iconClass: 'fa fa-files-o',
+    children: [{
+	    name: 'admin_console.res.pages',
+	    text: '#text('menu.res.pages')',
+	    iconClass: 'fa fa-file',
+	    templateUrl: window.contextPath + '/admin_console/res/pages.html',
+	    requireModule: 's/admin_console/res/pages',
+	    controller: 'admin_console.res.pages'
+    }, {
+        name: 'admin_console.res.sections',
+        text: '#text('menu.res.sections')',
+        iconClass: 'fa fa-th',
+        templateUrl: window.contextPath + '/admin_console/res/sections.html',
+        requireModule: 's/admin_console/res/sections',
+        controller: 'admin_console.res.sections'
+    }]
 }];
 #end
 #end

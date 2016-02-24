@@ -29,20 +29,21 @@ function addMenuToSections(items, parent, sections) {
 	for (var i = 0; i < items.length; i ++) {
 		var itm = items[i];
 		if (itm.name == homeSectionName) homeSection = itm;
-		if (itm.children) {
-			addMenuToSections(itm.children, itm, sections);
-		}
+		itm.path = [];
 		if (parent) {
 			itm.parent = parent;
-			itm.path = [];
-			if (parent && parent.path && parent.path.length) {
+			if (parent.path && parent.path.length) {
 				for (var j = 0; j < parent.path.length; j ++) {
 					itm.path.push(parent.path[j]);
 				}
 			}
 		}
+		itm.path.push(itm);
 		if (itm.templateUrl) {
 			sections.add(itm);
+		}
+		if (itm.children) {
+			addMenuToSections(itm.children, itm, sections);
 		}
 	}
 }
