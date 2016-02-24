@@ -1,0 +1,20 @@
+<div>
+#bundle('/general')
+#bundle('../res')
+    <form name="editingForm" class="form form-horizontal container-fluid">
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="itm_path">#text('pages.scripturl')</label>
+    
+            <div class="col-sm-5">
+                <input type="text" ng-model="editingItem.path" id="itm_path"
+                    placeholder="#text('pages.scripturl')" class="form-control" required ng-maxlength="100"
+                    ng-pattern="/^\/[\w,/]+.groovy$/" />
+            </div>
+            <div class="col-sm-4 help-inline">
+                <span>#text('pages.scripturl.hint')</span>
+            </div>
+        </div>
+    </form>
+#end
+#end
+</div>

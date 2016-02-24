@@ -1,0 +1,44 @@
+<div class="fill" n-layout>
+#bundle('/general')
+#bundle('../res')
+<div class="ui-layout-center">
+    <form name="editingForm" class="form form-horizontal container-fluid">
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="itm_path">#text('pages.pageurl')</label>
+    
+            <div class="col-sm-5">
+                <input type="text" ng-model="editingItem.path" id="itm_path"
+                    placeholder="#text('pages.pageurl')" class="form-control" required ng-maxlength="100"
+                    ng-pattern="/^\/[\w,/]+.html$/" />
+            </div>
+            <div class="col-sm-4 help-inline">
+                <span>#text('pages.pageurl.hint')</span>
+            </div>
+        </div>
+    </form>
+    <div ng-repeat="tpl in templates.result" class="col-md-4">
+        <a href="javascript:void(0)" class="thumbnail" ng-class="editingItem.template == tpl ? 'active' : ''"
+            ng-click="editingItem.template = tpl">
+            <img ng-src="{{contextPath}}{{tpl.image}}" alt="{{tpl.name}}">
+            <div class="caption"><h3 ng-bind="tpl.name"></h3>
+                <p ng-bind="tpl.path"></p>
+            </div>
+        </a>
+    </div>
+</div>
+<div class="ui-layout-south text-center">
+    <div class="buttons">
+        <button ng-disabled="editingForm.$invalid" class="btn btn-xs btn-success" ng-click="saveNewPage();">
+            <i class="fa fa-save"></i>
+            #text('save')
+        </button>
+        &nbsp;
+        <button class="btn btn-xs btn-default" ng-click="goback();">
+            <i class="fa fa-reload"></i>
+            #text('goback')
+        </button>
+    </div>
+</div>
+#end
+#end
+</div>

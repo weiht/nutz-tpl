@@ -1,1 +1,83 @@
-<h1>pages</h1>
+<div class="fill least-padding" ng-if="!visibleSection">
+#bundle('../menu')
+#bundle()
+<div class="widget-box nomargin" n-layout>
+    <div class="widget-title ui-layout-north">
+        <span class="icon">
+            <i class="fa fa-table"></i>
+        </span>
+        <h5>#text('menu.res.pages')</h5>
+        <div class="buttons">
+	        <button type="button" ng-disabled="saving" class="btn btn-xs btn-success"
+	            ng-click="addPage()">
+	            <i class="fa fa-file-code-o"></i> #text('pages.add.page')
+	        </button>
+	        <button type="button" ng-disabled="saving" class="btn btn-xs btn-success"
+	            ng-click="addScript()">
+	            <i class="fa fa-jsfiddle"></i> #text('pages.add.script')
+	        </button>
+            <button class="btn btn-xs btn-primary" ng-click="write();">
+                <i class="fa fa-plus"></i>
+                #text('pages.write.config')
+            </button>
+        </div>
+    </div>
+    <div class="widget-content nopadding ui-layout-center auto-scroll">
+        <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th class="rownum">#</th>
+                <th>#text('pages.requestUri')</th>
+                <th class="ops"></th>
+                <th>#text('pages.pageurl')</th>
+                <th class="ops"></th>
+                <th>#text('pages.scripturl')</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th class="column-filter">
+                    <div class="form-group has-feedback">
+                        <input type="text" ng-model="flt" class="form-control">
+                        <span class="fa fa-filter form-control-feedback"></span>
+                    </div>
+                </th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-if="!pages.result || !pages.result.length">
+                <td colspan="6">#text('nothing')</td>
+            </tr>
+	        <tr ng-repeat="page in pages.result | pagedefListFilter : flt" ng-if="pages.result&&pages.result.length">
+	            <td class="rownum" width="50" ng-bind="$index + 1"></td>
+	            <td width="320" ng-bind="page.requestUri"></td>
+	            <td width="70">
+	                <a ng-if="!!page.pageUrl" href="javascript:void(0);" ng-click="editPage(page)" title="#text('pages.edit.page')"><i class="fa fa-edit"></i></a>
+	                <a ng-if="!page.pageUrl" href="javascript:void(0);" ng-click="addPage(page)" title="#text('pages.add.page')"><i class="fa fa-plus text-success"></i></a>
+	                <a ng-if="!!page.pageUrl" href="javascript:void(0);" ng-click="removePage(page)" title="#text('pages.remove.page')"><i class="fa fa-minus text-danger"></i></a>
+	            </td>
+	            <td width="320">
+	                <span ng-bind="page.pageUrl"></span>
+	            </td>
+	            <td width="70">
+	                <a ng-if="!!page.scriptUrl" href="javascript:void(0);" ng-click="editScript(page)" title="#text('pages.edit.script')"><i class="fa fa-edit"></i></a>
+	                <a ng-if="!page.scriptUrl" href="javascript:void(0);" ng-click="addScript(page)" title="#text('pages.add.script')"><i class="fa fa-plus text-success"></i></a>
+	                <a ng-if="!!page.scriptUrl" href="javascript:void(0);" ng-click="removeScript(page)" title="#text('pages.remove.script')"><i class="fa fa-minus text-danger"></i></a>
+	            </td>
+	            <td width="320">
+	                <span ng-bind="page.scriptUrl"></span>
+	            </td>
+	        </tr>
+        </tbody>
+        </table>
+    </div>
+</div>
+#end
+#end
+</div>
+<div class="fill" ng-form="form">
+    <div class="fill" ng-repeat="sec in sections" n-section="{{sec}}" ng-if="sec == visibleSection"></div>
+</div>

@@ -1,0 +1,29 @@
+<div class="fill toolbar-panel" h-layout>
+#bundle('/general')
+#bundle('../res')
+<div class="pane ui-layout-north toolbar">
+    <div class="query-form" style="height:31px">
+        <div class="pull-left">
+            <label ng-bind="editingItem.pageUrl"></label>
+        </div>
+        <div class="pull-right" ng-if="!loading && !isNothing(editingItem.page)">
+            <button ng-disabled="savingPage" class="btn btn-xs btn-success" ng-click="savePageContent(editingItem)">
+                <i class="fa fa-save"></i> #text('save')
+            </button>
+            <button ng-disabled="savingPage" class="btn btn-xs btn-warning" ng-click="getPageContent(editingItem)">
+                <i class="fa fa-undo"></i> #text('res.rollback')
+            </button>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div class="pane ui-layout-center auto-scroll container-fluid">
+    <h3 class="loading col-xs-12" ng-if="loadingPage">#text('loading')</h3>
+    <div ng-if="!loadingPage" class="col-xs-12 codemirror-container">
+        <div code-mirror="pageEditorConfig" ng-model="editingItem.page"></div>
+    </div>
+</div>
+#end
+#end
+</div>
