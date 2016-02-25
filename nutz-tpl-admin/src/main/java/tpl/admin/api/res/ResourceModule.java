@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.nutz.ioc.annotation.InjectName;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.GET;
 
+@InjectName("api.resourceModule")
 @At("/res")
 public class ResourceModule {
 	@At("/templates/?")

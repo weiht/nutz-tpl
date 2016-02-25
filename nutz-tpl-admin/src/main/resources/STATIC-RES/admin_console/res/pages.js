@@ -25,8 +25,8 @@ function isNothing(obj) {
 }
 
 app.register.controller('admin_console.res.pages',
-		['$scope', 'admin_console.res.ressvc', 'gritterService',
-		 function($scope, ResourceService, gritterService) {
+		['$scope', 'admin_console.res.ressvc', 'admin_console.res.pagesvc', 'gritterService',
+		 function($scope, ResourceService, PageService, gritterService) {
 	var gritters = gritterService.Light(gritterService.Gritters);
 	$scope.sections =
 		[
@@ -37,7 +37,42 @@ app.register.controller('admin_console.res.pages',
 		];
 	$scope.isNothing = isNothing;
 	
-	$scope.pages = {result: []};
+	$scope.pages = PageService.all(function(r) {
+		if (typeof r.exception !== 'undefined') {
+			gritters.error({text: 'Failure on query: ' + (r.exception || 'Unkown error.')});
+		} else {
+			var lst = [];
+			for (var i = 0; i < r.pages.length; i ++) {
+				var p = r.pages[i];
+				lst.push({
+					requestUri: p,
+					pageUrl: p
+				});
+			}
+			for (var i = 0; i < r.scripts.length; i ++) {
+				var s = r.scripts[i];
+				var u = s.replace(/.groovy$/, '.html');
+				var f = null;
+				for (var j = 0; j < lst.length; j ++) {
+					var p = lst[j];
+					if (p.pageUrl && p.pageUrl == u) {
+						f = p;
+						p.scriptUrl = s;
+						break;
+					}
+				}
+				if (!f) {
+					lst.push({
+						requestUri: u,
+						scriptUrl: s
+					});
+				}
+			}
+			lst.sort(pagesSorter);
+			r.result = lst;
+		}
+	});
+	$scope.templates = ResourceService.templates({type: 'page'});
 	
 	$scope.addPage = function(page) {
 		$scope.editingItem = {

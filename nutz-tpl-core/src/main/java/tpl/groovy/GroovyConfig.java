@@ -13,12 +13,14 @@ import java.io.Writer;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.nutz.ioc.Ioc2;
 import org.nutz.json.Json;
+import org.nutz.lang.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -238,5 +240,17 @@ public class GroovyConfig {
 
 	public boolean isDevMode() {
 		return devMode;
+	}
+
+	public String[] getGroovyClasspaths() {
+		if (groovyClasspaths == null) return null;
+		List<String> retval = new ArrayList<String>();
+		for (String cp: groovyClasspaths) {
+			File f = Strings.isBlank(resourceLocation) ? new File(cp) : new File(cp, resourceLocation);
+			if (f.exists() && f.isDirectory()) {
+				retval.add(f.getAbsolutePath());
+			}
+		}
+		return retval.toArray(new String[0]);
 	}
 }

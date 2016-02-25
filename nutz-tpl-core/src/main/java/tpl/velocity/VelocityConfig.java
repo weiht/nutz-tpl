@@ -234,4 +234,13 @@ public class VelocityConfig {
 	public void setTemplateRepositories(String repos) {
 		this.templateRepositories = repos;
 	}
+	
+	public String[] getRepositories() {
+		if (repoDirs == null) return null;
+		String[] retval = new String[repoDirs.length];
+		for (int i = 0; i < repoDirs.length; i ++) {
+			retval[i] = repoDirs[i].getAbsolutePath();
+		}
+		return retval;
+	}
 }

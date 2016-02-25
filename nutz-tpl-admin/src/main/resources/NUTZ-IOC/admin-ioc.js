@@ -23,6 +23,20 @@ var ioc = {
 			}
 		}
 	},
+	"api.resourceModule": {
+		"type": "tpl.admin.api.res.ResourceModule",
+		"fields": {
+			
+		}
+	},
+	"api.res.pageModule": {
+		"type": "tpl.admin.api.res.PageModule",
+		"fields": {
+			"resourceUtil": {
+				"refer": "resourceUtil"
+			}
+		}
+	},
 	"api.dataSourceModule": {
 		"type": "tpl.admin.api.ds.DataSourceModule",
 		"fields": {
@@ -31,6 +45,17 @@ var ioc = {
 			},
 			"dao": {
 				"refer": "coreDao"
+			}
+		}
+	},
+	"resourceUtil": {
+		"type": "tpl.admin.api.res.ResourceUtil",
+		"fields": {
+			"velocityConfig": {
+				"refer": "velocityConfig"
+			},
+			"groovyConfig": {
+				"refer": "groovyConfig"
 			}
 		}
 	}
