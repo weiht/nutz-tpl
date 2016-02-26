@@ -103,7 +103,7 @@ app.register.controller('admin_console.res.pages',
 			gritters.error({text: 'Please choose a template.'});
 			return;
 		}
-		ResourceService.add({url: itm.path, templateName: tpl.path}, {}, function(p) {
+		PageService.add({url: itm.path, templateName: tpl.path}, {}, function(p) {
 			return function(r) {
 				if (typeof r.exception !== 'undefined') {
 					gritters.error({text: 'Failure when saving: ' + (r.exception || 'Unknown error.')});
@@ -119,13 +119,33 @@ app.register.controller('admin_console.res.pages',
 						$scope.pages.result.push(page);
 						$scope.pages.result.sort(pagesSorter);
 					}
-					addPageDialog.visible = false;
 					editPage(page);
 				}
 			};
-		}(itm.path));
+		}(itm.path), function(h) {
+			gritters.error({text: 'Failure when saving, code: ' + h.status + '[' + h.statusText + ']'});
+		});
 	}
 	$scope.saveNewPage = saveNewPage;
+
+	function editPage(page) {
+		$scope.editingItem = ng.extend({}, page);
+		getPageContent($scope.editingItem);
+		$scope.visibleSection = 'admin_console.res.pages.editpage';
+	}
+	$scope.editPage = editPage;
+	
+	function getPageContent(page) {
+		$scope.loadingPage = true;
+		PageService.get({url: page.pageUrl}, function(r) {
+			$scope.loadingPage = false;
+			if (typeof r.exception !== 'undefined') {
+				gritters.error({text: '无法获取内容：' + (r.exception || '未知原因。')});
+			}
+			page.page = r.result || null;
+		});
+	}
+	$scope.getPageContent = getPageContent;
 }]);
 
 });

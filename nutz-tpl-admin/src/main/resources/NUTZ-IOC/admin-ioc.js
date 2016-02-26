@@ -56,6 +56,9 @@ var ioc = {
 			},
 			"groovyConfig": {
 				"refer": "groovyConfig"
+			},
+			"ioc": {
+				"refer": "$ioc"
 			}
 		}
 	}

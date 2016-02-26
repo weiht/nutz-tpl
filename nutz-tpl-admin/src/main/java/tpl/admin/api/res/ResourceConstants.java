@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ResourceConstants {
+	public static final String GROOVY_TEMPLATE = "/templates/scripts/groovy.script";
+	
 	public static final String TYPE_PAGE = "page";
 	public static final String TYPE_SECTION = "section";
 	public static final String TYPE_COMPONENT = "component";
