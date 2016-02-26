@@ -1,5 +1,6 @@
-define(['angular', 'app', 'necros/gritters',
-        './resource-services'], function(ng, app) {
+define(['angular', 'app', 'necros/gritters', 'necros/code-mirror',
+        './resource-services',
+        'codemirror/mode/htmlmixed/htmlmixed'], function(ng, app) {
 
 app.register.filter('pagedefListFilter', function() {
 	return function(pages, f) {
@@ -36,10 +37,13 @@ app.register.controller('admin_console.res.pages',
 			'admin_console.res.pages.editscript'
 		];
 	$scope.isNothing = isNothing;
+	$scope.goback = function() {
+		$scope.visibleSection = null;
+	};
 	
 	$scope.pages = PageService.all(function(r) {
-		if (typeof r.exception !== 'undefined') {
-			gritters.error({text: 'Failure on query: ' + (r.exception || 'Unkown error.')});
+		if (typeof r.stackTrace !== 'undefined') {
+			gritters.error({text: 'Failure on query: ' + (r.detailMessage || 'Unkown error.')});
 		} else {
 			var lst = [];
 			for (var i = 0; i < r.pages.length; i ++) {
@@ -105,8 +109,8 @@ app.register.controller('admin_console.res.pages',
 		}
 		PageService.add({url: itm.path, templateName: tpl.path}, {}, function(p) {
 			return function(r) {
-				if (typeof r.exception !== 'undefined') {
-					gritters.error({text: 'Failure when saving: ' + (r.exception || 'Unknown error.')});
+				if (typeof r.stackTrace !== 'undefined') {
+					gritters.error({text: 'Failure when saving: ' + (r.detailMessage || 'Unknown error.')});
 				} else {
 					var page = exists(p, 'requestUri');
 					if (page) {
@@ -139,13 +143,30 @@ app.register.controller('admin_console.res.pages',
 		$scope.loadingPage = true;
 		PageService.get({url: page.pageUrl}, function(r) {
 			$scope.loadingPage = false;
-			if (typeof r.exception !== 'undefined') {
-				gritters.error({text: '无法获取内容：' + (r.exception || '未知原因。')});
+			if (typeof r.stackTrace !== 'undefined') {
+				gritters.error({text: 'Failure loading content: ' + (r.detailMessage || 'Unkown error.')});
 			}
 			page.page = r.result || null;
 		});
 	}
 	$scope.getPageContent = getPageContent;
+	
+	function savePageContent(page) {
+		$scope.savingPage = true;
+		PageService.update({url: page.pageUrl}, {content: page.page}, function(r) {
+			$scope.savingPage = false;
+			if (typeof r.stackTrace !== 'undefined') {
+				gritters.error({text: 'Failure loading content: ' + (r.detailMessage || 'Unkown error.')});
+			} else {
+				gritters.success({text: 'Saved.'});
+				page.page = r.result || null;
+			}
+		});
+	};
+	$scope.savePageContent = savePageContent;
+	$scope.removePage = function(page) {
+		alert('Not implemented yet.');
+	};
 }]);
 
 });

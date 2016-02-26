@@ -199,6 +199,35 @@ public class ResourceUtil {
 		return findReadResourceAsString(repos, path);
 	}
 	
+	public String savePageResource(String apath, String acontent, String arepo) {
+		String path = apath;
+		if (path == null || path.isEmpty()) return null;
+		if (path.startsWith("view:")) path = path.substring(5);
+		String repo = arepo;
+		if (repo == null || repo.isEmpty()) repo = getPageRepositories()[0];
+		return saveContentToFile(path, repo, acontent);
+	}
+	
+	public String saveScriptResource(String apath, String acontent, String arepo) {
+		String path = apath;
+		if (path == null || path.isEmpty()) return null;
+		String repo = arepo;
+		if (repo == null || repo.isEmpty()) repo = getScriptRepositories()[0];
+		return saveContentToFile(path, repo, acontent);
+	}
+
+	private String saveContentToFile(String apath, String arepo, String acontent) {
+		File f = new File(arepo, apath);
+		try {
+			if (!f.exists()
+				&& (!f.getParentFile().exists() && !f.getParentFile().mkdirs() || !f.createNewFile())) return null;
+		} catch (IOException e) {
+			return null;
+		}
+		stringToFile(f, acontent);
+		return acontent;
+	}
+	
 	private String[] getScriptRepositories() {
 		return groovyConfig.getGroovyClasspaths();
 	}

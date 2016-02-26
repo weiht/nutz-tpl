@@ -1,7 +1,14 @@
-<div class="fill" n-layout>
+<div class="fill widget-box" n-layout>
 #bundle('/general')
 #bundle('../res')
-<div class="ui-layout-center">
+<div class="pane ui-layout-north widget-title nomargin">
+    <span class="icon">
+        <i class="fa fa-file-o"></i>
+    </span>
+    <h5>#text('pages.add')</h5>
+</div>
+
+<div class="ui-layout-center widget-content">
     <form name="editingForm" class="form form-horizontal container-fluid">
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="itm_path">#text('pages.pageurl')</label>
@@ -26,7 +33,7 @@
         </a>
     </div>
 </div>
-<div class="ui-layout-south text-center">
+<div class="ui-layout-south widget-footer text-center">
     <div class="buttons">
         <button ng-disabled="editingForm.$invalid" class="btn btn-xs btn-success" ng-click="saveNewPage();">
             <i class="fa fa-save"></i>

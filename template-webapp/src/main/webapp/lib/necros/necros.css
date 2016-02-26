@@ -2,3 +2,15 @@
 	width: 100%;
 	height: 100%;
 }
+
+[v-autoscroll]>*>.CodeMirror,
+.codemirror-container>*>.CodeMirror,
+.auto-scroll>*>.CodeMirror {
+    height: auto;
+    font-family: 'Courier New', Courier, '宋体'
+}
+
+.codemirror-container {
+	padding-left: 0px;
+	padding-right: 0px;
+}

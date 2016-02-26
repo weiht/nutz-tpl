@@ -6,9 +6,12 @@ import java.util.Map;
 
 import org.nutz.ioc.annotation.InjectName;
 import org.nutz.lang.Strings;
+import org.nutz.mvc.adaptor.JsonAdaptor;
+import org.nutz.mvc.annotation.AdaptBy;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.GET;
 import org.nutz.mvc.annotation.POST;
+import org.nutz.mvc.annotation.PUT;
 import org.nutz.mvc.annotation.Param;
 
 @InjectName("api.res.pageModule")
@@ -69,6 +72,22 @@ public class PageModule {
 			result.put("result", resourceUtil.getScriptResource(url));
 		} else {
 			result.put("result", resourceUtil.getPageResource(url));
+		}
+		return result;
+	}
+	
+	@At("/da")
+	@PUT @AdaptBy(type=JsonAdaptor.class)
+	public Object saveContent(@Param("url") String url, Map<String, String> page) {
+		if (url == null || url.isEmpty()) {
+			throw new RuntimeException("No page is specified.");
+		}
+		boolean isScript = url.endsWith(".groovy");
+		Map<String, Object> result = new HashMap<String, Object>();
+		if (isScript) {
+			result.put("result", resourceUtil.saveScriptResource(url, page.get("content"), null));
+		} else {
+			result.put("result", resourceUtil.savePageResource(url, page.get("content"), null));
 		}
 		return result;
 	}
