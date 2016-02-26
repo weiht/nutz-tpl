@@ -27,7 +27,7 @@
         <thead>
             <tr>
                 <th class="rownum">#</th>
-                <th>#text('pages.requestUri')</th>
+                <th class="filtered-input">#text('pages.requestUri')</th>
                 <th class="ops"></th>
                 <th>#text('pages.pageurl')</th>
                 <th class="ops"></th>
@@ -35,11 +35,9 @@
             </tr>
             <tr>
                 <th></th>
-                <th class="column-filter">
-                    <div class="form-group has-feedback">
-                        <input type="text" ng-model="flt" class="form-control">
-                        <span class="fa fa-filter form-control-feedback"></span>
-                    </div>
+                <th class="nopadding form-group has-feedback filtered-input">
+                    <input type="text" ng-model="flt" class="fill form-control no-border">
+                    <span class="form-control-feedback"><i class="fa fa-filter"></i></span>
                 </th>
                 <th></th>
                 <th></th>

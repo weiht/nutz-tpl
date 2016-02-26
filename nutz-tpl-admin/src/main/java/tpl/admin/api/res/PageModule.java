@@ -48,7 +48,7 @@ public class PageModule {
 		if (isScript) {
 			String pkg = toPackage(url);
 			Map<String, Object> section = new HashMap<String, Object>();
-			section.put("package", pkg);
+			if (!Strings.isBlank(pkg)) section.put("package", pkg);
 			section.put("url", url);
 			String retval = resourceUtil.ensureScriptResource(url, ResourceConstants.GROOVY_TEMPLATE,
 					null, section);

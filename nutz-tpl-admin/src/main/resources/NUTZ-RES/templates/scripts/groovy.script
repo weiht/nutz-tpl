@@ -1,4 +1,3 @@
 #if ($section.package)
 package ${section.package};
 #end
-

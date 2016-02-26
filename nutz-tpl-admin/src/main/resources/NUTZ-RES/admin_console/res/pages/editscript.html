@@ -1,27 +1,34 @@
-<div class="fill toolbar-panel" h-layout>
+<div class="fill widget-box nomargin" n-layout>
 #bundle('/general')
 #bundle('../res')
-<div class="pane ui-layout-north toolbar">
-    <div class="query-form" style="height:31px">
-        <div class="pull-left">
-            <label ng-bind="editingItem.scriptUrl"></label>
-        </div>
-        <div class="pull-right" ng-if="!loading && !isNothing(editingItem.script)">
-            <button ng-disabled="savingScript" class="btn btn-xs btn-success" ng-click="saveScriptContent(editingItem)">
-                <i class="fa fa-save"></i> #text('save')
-            </button>
-            <button ng-disabled="savingScript" class="btn btn-xs btn-warning" ng-click="getScriptContent(editingItem)">
-                <i class="fa fa-undo"></i> #text('res.rollback')
-            </button>
-        </div>
-        <div class="clearfix"></div>
+<div class="pane ui-layout-north widget-title nomargin">
+    <span class="icon">
+        <i class="fa fa-file-o"></i>
+    </span>
+    <h5>#text('pages.editscript') - <span ng-bind="editingItem.scriptUrl"></span></h5>
+</div>
+
+<div class="pane ui-layout-center auto-scroll container-fluid widget-content nopadding">
+    <h3 class="loading col-xs-12" ng-if="loadingScript">#text('loading')</h3>
+    <div ng-if="!loadingScript" class="col-xs-12 codemirror-container">
+        <div code-mirror ng-model="editingItem.script"></div>
     </div>
 </div>
 
-<div class="pane ui-layout-center auto-scroll container-fluid">
-    <h3 class="loading col-xs-12" ng-if="loadingScript">#text('loading')</h3>
-    <div ng-if="!loadingScript" class="col-xs-12 codemirror-container">
-        <div code-mirror="scriptEditorConfig" ng-model="editingItem.script"></div>
+<div class="pane ui-layout-south text-center widget-footer">
+    <div class="buttons">
+        <button ng-disabled="savingScript" class="btn btn-xs btn-success" ng-click="saveScriptContent(editingItem)">
+            <i class="fa fa-save"></i> #text('save')
+        </button>
+        &nbsp;
+        <button ng-disabled="savingScript" class="btn btn-xs btn-warning" ng-click="getScriptContent(editingItem)">
+            <i class="fa fa-undo"></i> #text('res.rollback')
+        </button>
+        &nbsp;
+        <button class="btn btn-xs btn-default" ng-click="goback();">
+            <i class="fa fa-reload"></i>
+            #text('goback')
+        </button>
     </div>
 </div>
 #end
