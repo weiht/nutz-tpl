@@ -43,6 +43,18 @@ var mainMenu = [{
         requireModule: 's/admin_console/res/sections',
         controller: 'admin_console.res.sections'
     }]
+}, {
+    name: 'admin_console.builtin',
+    text: '#text('menu.entities.builtin')',
+    iconClass: 'fa fa-leaf',
+    children: [{
+        name: 'admin_console.builtin.accounts',
+        text: '#text('menu.builtin.accounts')',
+        iconClass: 'fa fa-key',
+        templateUrl: window.contextPath + '/admin_console/builtin/accounts.html',
+        requireModule: 's/admin_console/builtin/accounts',
+        controller: 'admin_console.builtin.accounts'
+    }]
 }];
 #end
 #end
