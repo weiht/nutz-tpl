@@ -61,5 +61,21 @@ var ioc = {
 				"refer": "$ioc"
 			}
 		}
+	},
+	"api.entityModule": {
+		"type": "tpl.admin.api.entities.EntityModule",
+		"fields": {
+			"dao": {
+				"refer": "coreDao"
+			}
+		}
+	},
+	"api.entitiesModule": {
+		"type": "tpl.admin.api.entities.EntitiesModule",
+		"fields": {
+			"dao": {
+				"refer": "coreDao"
+			}
+		}
 	}
 };
