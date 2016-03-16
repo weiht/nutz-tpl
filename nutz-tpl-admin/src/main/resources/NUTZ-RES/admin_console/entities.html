@@ -1,0 +1,69 @@
+<div class="fill least-padding" ng-if="!visibleSection">
+#bundle('menu')
+#bundle()
+<div class="widget-box nomargin" n-layout>
+    <div class="widget-title ui-layout-north">
+        <span class="icon">
+            <i class="fa fa-table"></i>
+        </span>
+        <h5>#text('menu.entities')</h5>
+        <div class="buttons">
+            <button class="btn btn-xs btn-success" ng-click="add();">
+                <i class="fa fa-plus"></i>
+                #text('add')
+            </button>
+        </div>
+    </div>
+    <div class="widget-content nopadding ui-layout-center auto-scroll">
+        <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th class="rownum">#</th>
+                <th class="ops"></th>
+                <th class="filtered-input">#text('entities.name')</th>
+                <th>#text('entities.displayName')</th>
+                <th>#text('entities.tableName')</th>
+                <th>#text('entities.description')</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th></th>
+                <th class="nopadding form-group has-feedback filtered-input">
+                    <input type="text" class="fill form-control no-border" ng-model="cri"
+                        ng-keypress="criKeyPressed($event, cri)"/>
+                    <span class="form-control-feedback"><i class="fa fa-filter"></i></span>
+                </th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-if="!page.result || !page.result.length">
+                <td colspan="6">#text('nothing')</td>
+            </tr>
+            <tr ng-repeat="entity in page.result" ng-if="page.result && page.result.length">
+                <td ng-bind="$index + 1">#</td>
+                <td class="ops">
+                	<a class="text-primary" href="javascript:void(0)" title="#text('edit')" ng-click="edit(entity)"><i class="fa fa-edit"></i></a>
+                	<a class="text-danger" href="javascript:void(0)" title="#text('remove')" ng-click="remove(entity)"><i class="fa fa-minus"></i></a>
+                </td>
+                <td ng-bind="entity.name">name</td>
+                <td ng-bind="entity.displayName">display name</td>
+                <td ng-bind="entity.tableName">table name</td>
+                <td ng-bind="entity.description">description</td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+    <div class="widget-footer ui-layout-south">
+        <div n-pagination="paginationConfig"
+            pagination-data="page" go-page="goPage" class="pagination-placeholder">&nbsp;</div>
+    </div>
+</div>
+#end
+#end
+</div>
+<div class="fill" ng-form="form">
+    <div class="fill" ng-repeat="sec in sections" n-section="{{sec}}" ng-if="sec == visibleSection"></div>
+</div>

@@ -13,7 +13,7 @@ var mainMenu = [{
 }, {
     name: 'admin_console.prefs',
     text: '#text('menu.prefs')',
-    iconClass: 'fa fa-table',
+    iconClass: 'fa fa-gears',
     templateUrl: window.contextPath + '/admin_console/prefs.html',
     requireModule: 's/admin_console/prefs',
     controller: 'admin_console.prefs'
@@ -43,6 +43,13 @@ var mainMenu = [{
         requireModule: 's/admin_console/res/sections',
         controller: 'admin_console.res.sections'
     }]
+}, {
+    name: 'admin_console.entities',
+    text: '#text('menu.entities')',
+    iconClass: 'fa fa-table',
+    templateUrl: window.contextPath + '/admin_console/entities.html',
+    requireModule: 's/admin_console/entities',
+    controller: 'admin_console.entities'
 }, {
     name: 'admin_console.builtin',
     text: '#text('menu.entities.builtin')',
