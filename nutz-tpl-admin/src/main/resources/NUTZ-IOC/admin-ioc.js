@@ -70,6 +70,14 @@ var ioc = {
 			}
 		}
 	},
+	"api.entities.builtinAccountDsModule": {
+		"type": "tpl.admin.api.entities.builtin.AccountDsModule",
+		"fields": {
+			"dao": {
+				"refer": "coreDao"
+			}
+		}
+	},
 	"api.entitiesModule": {
 		"type": "tpl.admin.api.entities.EntitiesModule",
 		"fields": {

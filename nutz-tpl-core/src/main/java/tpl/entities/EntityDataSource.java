@@ -5,7 +5,7 @@ import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.PK;
 import org.nutz.dao.entity.annotation.Table;
 
-@Table("core_entity_datasets")
+@Table("core_entity_datasources")
 @PK({"dataSourceName", "entityName"})
 public class EntityDataSource {
 	@Column("ds_name") @ColDefine(notNull=true, update=false, width=200)
