@@ -1,6 +1,8 @@
 package tpl.admin.api.entities.builtin;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.nutz.NutRuntimeException;
 import org.nutz.dao.Cnd;
@@ -21,6 +23,8 @@ import tpl.entities.EntityDataSource;
 @InjectName("api.entities.builtinAccountDsModule")
 @At("/builtin/account")
 public class AccountDsModule {
+	private static final String ENTITY_NAME = DbAuthenticationInfo.class.getName();
+	
 	private Dao dao;
 
 	private SimpleCriteria createCriteria() {
@@ -32,7 +36,7 @@ public class AccountDsModule {
 	@At("/ds/da/?")
 	@GET
 	public EntityDataSource get(String name) {
-		return dao.fetchx(EntityDataSource.class, DbAuthenticationInfo.class, name);
+		return dao.fetchx(EntityDataSource.class, name, ENTITY_NAME);
 	}
 	
 	@At("/ds/da")
@@ -40,6 +44,7 @@ public class AccountDsModule {
 	@AdaptBy(type=JsonAdaptor.class)
 	public EntityDataSource add(EntityDataSource def) {
 		if (get(def.getDataSourceName()) != null) throw new NutRuntimeException("Duplicated entry.");
+		def.setEntityName(ENTITY_NAME);
 		return dao.insert(def);
 	}
 	
@@ -55,14 +60,17 @@ public class AccountDsModule {
 	public EntityDataSource delete(String name) {
 		EntityDataSource def = get(name);
 		if (def != null)
-			dao.deletex(EntityDataSource.class, DbAuthenticationInfo.class.getName(), name);
+			dao.deletex(EntityDataSource.class, name, ENTITY_NAME);
 		return def;
 	}
 	
 	@At("/ds/")
 	@GET
-	public List<EntityDataSource> all() {
-		return dao.query(EntityDataSource.class, createCriteria());
+	public Map<String, Object> all() {
+		List<EntityDataSource>lst = dao.query(EntityDataSource.class, createCriteria());
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("result", lst);
+		return result;
 	}
 
 	public void setDao(Dao dao) {
