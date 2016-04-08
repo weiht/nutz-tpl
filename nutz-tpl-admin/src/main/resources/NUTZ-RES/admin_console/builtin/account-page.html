@@ -1,0 +1,49 @@
+<div class="fill least-padding">
+#bundle('menu')
+#bundle()
+<div class="widget-box nomargin" n-layout>
+    <div class="widget-title ui-layout-north">
+        <span class="icon">
+            <i class="fa fa-table"></i>
+        </span>
+        <h5>#text('builtin.accounts.list')</h5>
+        <div class="buttons">
+            <button class="btn btn-xs btn-default" ng-click="goback()">
+                #text('goback')
+            </button>
+        </div>
+    </div>
+    <div class="widget-content nopadding ui-layout-center auto-scroll">
+        <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th class="rownum">#</th>
+                <th class="ops"></th>
+                <th class="filtered-input">#text('builtin.account.login')</th>
+                <th>#text('builtin.account.display_name')</th>
+                <th>#text('builtin.account.salt')</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-if="!page.result || !page.result.length">
+                <td colspan="5">#text('nothing')</td>
+            </tr>
+            <tr ng-repeat="acc in page.result" ng-if="page.result && page.result.length">
+                <td ng-bind="$index + 1">#</td>
+                <td class="ops">
+                </td>
+                <td ng-bind="acc.loginName">login</td>
+                <td ng-bind="acc.displayName">name</td>
+                <td ng-bind="acc.passwordSalt">salt</td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+    <div class="widget-footer ui-layout-south">
+        <div n-pagination="paginationConfig"
+            pagination-data="page" go-page="goPage" class="pagination-placeholder">&nbsp;</div>
+    </div>
+</div>
+#end
+#end
+</div>

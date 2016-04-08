@@ -65,6 +65,15 @@ app.register.controller('admin_console.builtin.accounts',
 			});
 		}
 	};
+	
+	$scope.viewAccounts = function(eds) {
+		$scope.viewingEDS = eds;
+		$scope.visibleSection = 'admin_console.builtin.accounts.page';
+	};
+	
+	$scope.goback = function() {
+		$scope.visibleSection = null;
+	};
 }]);
 
 });
