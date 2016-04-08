@@ -11,6 +11,7 @@ import org.nutz.mvc.annotation.POST;
 import org.nutz.mvc.annotation.PUT;
 
 import tpl.entities.EntityDef;
+import tpl.entities.StatusCodes;
 
 @InjectName("api.entityModule")
 public class EntityModule {
@@ -31,6 +32,7 @@ public class EntityModule {
 		EntityDef origin = dao.fetch(EntityDef.class, entity.getName());
 		if (origin != null)
 			throw new RuntimeException("Entity definition already exists.");
+		entity.setStatus(StatusCodes.STATUS_BRAND_NEW | StatusCodes.STATUS_UNAPPLIED);
 		return dao.insert(entity);
 	}
 	
@@ -44,8 +46,8 @@ public class EntityModule {
 		if (origin == null)
 			throw new RuntimeException("Entity definition is not found.");
 		origin.setDisplayName(entity.getDisplayName());
-		origin.setTableName(entity.getTableName());
 		origin.setDescription(entity.getDescription());
+		origin.setStatus(origin.getStatus() | StatusCodes.STATUS_UNAPPLIED);
 		dao.update(origin);
 		return entity;
 	}

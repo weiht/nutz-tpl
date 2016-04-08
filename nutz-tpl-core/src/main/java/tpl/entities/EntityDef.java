@@ -18,6 +18,8 @@ public class EntityDef {
 	private String tableName;
 	@Column("descriptions") @ColDefine(width=200)
 	private String description;
+	@Column("applied_status")
+	private int status;
 	@Many(target=PropertyDef.class, key="name", field="entityName")
 	private List<PropertyDef> properties;
 
@@ -51,6 +53,14 @@ public class EntityDef {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	public List<PropertyDef> getProperties() {

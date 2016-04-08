@@ -42,7 +42,7 @@ app.register.controller('admin_console.entities',
 				{}, $scope.editingItem,
 				function(r) {
 			if (r.stackTrace) {
-				alert(r.detailMessage);
+				alert(r.detailMessage || 'Unknown error.');
 			} else {
 				$scope.goPage();
 				$scope.goback();
