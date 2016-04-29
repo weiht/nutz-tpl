@@ -1,69 +1,55 @@
-#bundle('/general')
+#bundle('../entities')
 #bundle()
 <div class="widget-box nomargin" n-layout>
     <div class="widget-title ui-layout-north">
         <span class="icon">
             <i class="fa fa-edit"></i>
         </span>
-        <h5>#text('admin_console.ds.edit')</h5>
+        <h5>#text('admin_console.entities.edit')</h5>
     </div>
     <div class="widget-content nopadding ui-layout-center autoscroll">
 <div class="form form-horizontal">
     <div class="form-group">
-        <label class="col-sm-2 control-label no-padding-right" for="ds_name">#text('ds.name.title')</label>
+        <label class="col-sm-2 control-label no-padding-right" for="ds_name">#text('entities.name')</label>
 
         <div class="col-sm-6">
             <input type="text" ng-model="editingItem.name"
-                id="ds_name" placeholder="#text('ds.name.placeholder')"
+                id="ds_name" placeholder="#text('entities.name.placeholder')"
                 ng-disabled="!editingItem._is_new"
                 class="form-control" required ng-maxlength="50" />
         </div>
         <div class="col-sm-4 help-inline">
-            #text('ds.name.inputhint')
+            #text('entities.name.inputhint')
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-2 control-label no-padding-right" for="ds_url">#text('ds.url.title')</label>
+        <label class="col-sm-2 control-label no-padding-right" for="displayName">#text('entities.displayName')</label>
 
         <div class="col-sm-6">
-            <textarea ng-model="editingItem.url" id="ds_url" class="form-control" rows="5"></textarea>
+            <input type="text" ng-model="editingItem.displayName" id="displayName" class="form-control">
         </div>
         <div class="col-sm-4 help-inline">
-            #text('ds.url.inputhint')
+            #text('entities.displayName.inputhint')
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-2 control-label no-padding-right" for="ds_user">#text('ds.user.title')</label>
+        <label class="col-sm-2 control-label no-padding-right" for="tableName">#text('entities.tableName')</label>
 
         <div class="col-sm-6">
-            <input type="text" ng-model="editingItem.user"
-                id="ds_user" placeholder="#text('ds.user.placeholder')"
-                class="form-control" ng-maxlength="50" />
+            <input type="text" ng-disabled="!editingItem._is_new" ng-model="editingItem.tableName" id="tableName" class="form-control">
         </div>
         <div class="col-sm-4 help-inline">
-            #text('ds.user.inputhint')
+            #text('entities.tableName.inputhint')
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-2 control-label no-padding-right" for="ds_password">#text('ds.password.title')</label>
-
-        <div class="col-sm-6">
-            <input type="text" ng-model="editingItem.password"
-                id="ds_password" placeholder="#text('ds.password.placeholder')"
-                class="form-control" ng-maxlength="50" />
-        </div>
-        <div class="col-sm-4 help-inline">
-            #text('ds.password.inputhint')
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label no-padding-right" for="pref_desc">#text('ds.desc.title')</label>
+        <label class="col-sm-2 control-label no-padding-right" for="pref_desc">#text('entities.description')</label>
 
         <div class="col-sm-6">
             <textarea ng-model="editingItem.description" id="pref_desc" class="form-control" rows="5" ng-maxlength="100"></textarea>
         </div>
         <div class="col-sm-4 help-inline">
-            #text('ds.desc.inputhint')
+            #text('entities.description.inputhint')
         </div>
     </div>
 </div>

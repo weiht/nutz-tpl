@@ -12,6 +12,10 @@
                 <i class="fa fa-plus"></i>
                 #text('add')
             </button>
+            <button class="btn btn-xs btn-primary" ng-click="applyAll();">
+                <i class="fa fa-check"></i>
+                #text('apply.all')
+            </button>
         </div>
     </div>
     <div class="widget-content nopadding ui-layout-center auto-scroll">
@@ -46,6 +50,7 @@
                 <td ng-bind="$index + 1">#</td>
                 <td class="ops">
                 	<a class="text-primary" href="javascript:void(0)" title="#text('edit')" ng-click="edit(entity)"><i class="fa fa-edit"></i></a>
+                	<a class="text-primary" href="javascript:void(0)" title="#text('apply')" ng-click="apply(entity)"><i class="fa fa-check"></i></a>
                 	<a class="text-danger" href="javascript:void(0)" title="#text('remove')" ng-click="remove(entity)"><i class="fa fa-minus"></i></a>
                 </td>
                 <td ng-bind="entity.name">name</td>
