@@ -23,6 +23,8 @@ public class PropertyDef {
 	private int precision;
 	@Column("not_null") @ColDefine(notNull=true, width=200)
 	private int notNull;
+	@Column("ref_entity_id") @ColDefine(width=200)
+	private String referencingEntityId;
 
 	public String getName() {
 		return name;

@@ -12,6 +12,8 @@ public class EntityDataSource {
 	private String dataSourceName;
 	@Column("entity_name") @ColDefine(notNull=true, update=false, width=200)
 	private String entityName;
+	@Column("table_status") @ColDefine(notNull=true)
+	private int tableStatus;
 
 	public String getDataSourceName() {
 		return dataSourceName;
@@ -27,5 +29,13 @@ public class EntityDataSource {
 
 	public void setEntityName(String entityName) {
 		this.entityName = entityName;
+	}
+
+	public int getTableStatus() {
+		return tableStatus;
+	}
+
+	public void setTableStatus(int tableStatus) {
+		this.tableStatus = tableStatus;
 	}
 }
