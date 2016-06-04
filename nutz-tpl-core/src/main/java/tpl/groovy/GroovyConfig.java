@@ -1,19 +1,11 @@
 package tpl.groovy;
 
-import groovy.lang.Binding;
-import groovy.lang.GroovyShell;
-import groovy.util.GroovyScriptEngine;
-import groovy.util.ResourceException;
-import groovy.util.ScriptException;
-import tpl.velocity.VelocityConfig;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +15,13 @@ import org.nutz.json.Json;
 import org.nutz.lang.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import groovy.lang.Binding;
+import groovy.lang.GroovyShell;
+import groovy.util.GroovyScriptEngine;
+import groovy.util.ResourceException;
+import groovy.util.ScriptException;
+import tpl.velocity.VelocityConfig;
 
 public class GroovyConfig {
 	private static final Logger logger = LoggerFactory.getLogger(GroovyConfig.class);
@@ -42,6 +41,7 @@ public class GroovyConfig {
 	};
 	
 	private String resourceLocation = VelocityConfig.DEFAULT_RESOURCE_LOCATION;
+	private String groovyClasspath = null;
 	private String[] groovyClasspaths = new String[0];
 	private Binding rootBinding = new Binding();
 	private GroovyScriptEngine engine;
@@ -52,8 +52,8 @@ public class GroovyConfig {
 	private void loadGroovyClasspaths() {
 		if (groovyClasspaths != null && groovyClasspaths.length > 0) return;
 		List<String> classpaths = new ArrayList<String>();
-		String paths = System.getProperty(SYS_PROP_GROOVY_SCRIPT_PATHS);
-		if (paths != null) {
+		String paths = groovyClasspath != null ? groovyClasspath : System.getProperty(SYS_PROP_GROOVY_SCRIPT_PATHS);
+		if (paths != null && !(paths = paths.trim()).isEmpty()) {
 			for (String p: paths.split(File.pathSeparator)) {
 				p = p.trim();
 				if (!p.isEmpty()) {
@@ -231,11 +231,18 @@ public class GroovyConfig {
 	}
 	
 	public void setGroovyClasspath(String cp) {
-		if (cp == null || cp.isEmpty()) {
-			groovyClasspaths = null;
+		if (cp == null || (cp = cp.trim()).isEmpty()) {
+			groovyClasspath = null;
 		} else {
-			groovyClasspaths = cp.split(File.pathSeparator);
+			groovyClasspath = cp;
 		}
+		reloadEngine();
+	}
+	
+	public void reloadEngine() {
+		engine = null;
+		groovyClasspaths = null;
+		if (!devMode) resMappings.clear();
 	}
 
 	public boolean isDevMode() {

@@ -232,7 +232,16 @@ public class VelocityConfig {
 	}
 	
 	public void setTemplateRepositories(String repos) {
-		this.templateRepositories = repos;
+		if (repos == null || (repos = repos.trim()).isEmpty()) {
+			templateRepositories = null;
+		} else {
+			templateRepositories = repos;
+		}
+		reloadEngine();
+	}
+	
+	public void reloadEngine() {
+		engine = null;
 	}
 	
 	public String[] getRepositories() {
