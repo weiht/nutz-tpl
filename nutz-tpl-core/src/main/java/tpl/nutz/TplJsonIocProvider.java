@@ -35,7 +35,7 @@ implements IocProvider {
 			logger.warn("", e);
 		}
 		IocLoader loader = new ComboIocLoader(
-			new JsonLoader("NUTZ-IOC/"),
+			new JsonLoader("NUTZ-IOC/", "NUTZ-MVC/"),
 			daoLoader
 		);
 		rootIoc = new NutIoc(loader);

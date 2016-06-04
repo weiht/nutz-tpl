@@ -34,6 +34,8 @@ implements Filter {
 			throws IOException, ServletException {
 		if (internalFilter != null) {
 			internalFilter.doFilter(request, response, chain);
+		} else {
+			chain.doFilter(request, response);
 		}
 	}
 

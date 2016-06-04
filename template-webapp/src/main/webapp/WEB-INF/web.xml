@@ -79,7 +79,7 @@
     
     <servlet>
        <servlet-name>staticServlet</servlet-name>
-       <servlet-class>tpl.nutz.web.StaticServlet</servlet-class>
+       <servlet-class>tpl.nutz.web.NutzDelegatingServlet</servlet-class>
     </servlet>
     
     <servlet-mapping>

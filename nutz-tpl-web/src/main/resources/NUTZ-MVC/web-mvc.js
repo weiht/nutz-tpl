@@ -16,6 +16,9 @@ var ioc = {
 			}
 		}
 	},
+	staticServlet: {
+		type: "tpl.nutz.web.StaticServlet"
+	},
 	mimeUtil: {
 		type: "tpl.nutz.web.MimeUtil",
 		fields: {
