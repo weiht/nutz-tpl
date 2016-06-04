@@ -29,10 +29,17 @@ extends HttpServlet {
 	
 	private String resourceLocation = DEFAULT_RESOURCE_LOCATION;
 	private List<File> locations;
+	private String staticResourceRepositories;
 	
 	@Override
 	public void init() throws ServletException {
 		super.init();
+		if (locations == null) {
+			doInit();
+		}
+	}
+	
+	public void doInit() throws ServletException {
 		prepareResourceLocation();
 		initPaths();
 	}
@@ -45,7 +52,7 @@ extends HttpServlet {
 	}
 
 	private void initPaths() {
-		String paths = System.getProperty(SYS_PROP_STATIC_RESOURCE_PATHS);
+		String paths = staticResourceRepositories != null ? staticResourceRepositories : System.getProperty(SYS_PROP_STATIC_RESOURCE_PATHS);
 		logger.info("System property {}: {}", SYS_PROP_STATIC_RESOURCE_PATHS, paths);
 		if (paths == null || (paths = paths.trim()).isEmpty()) return;
 		ArrayList<File> locs = new ArrayList<File>();
@@ -104,5 +111,24 @@ extends HttpServlet {
 
 	private void writeToResp(InputStream ins, HttpServletResponse resp) throws IOException {
 		Streams.writeAndClose(resp.getOutputStream(), ins);
+	}
+	
+	public void reload() {
+		locations = null;
+		try {
+			doInit();
+		} catch (ServletException e) {
+			logger.error("");
+		}
+	}
+
+	public void setStaticResourceRepositories(String resourceRepositories) {
+		String repos = resourceRepositories;
+		if (repos == null || (repos = repos.trim()).isEmpty()) {
+			staticResourceRepositories = null;
+		} else {
+			staticResourceRepositories = repos;
+		}
+		reload();
 	}
 }
