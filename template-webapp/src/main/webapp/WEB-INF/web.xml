@@ -66,16 +66,26 @@
        <filter-name>web</filter-name>
        <url-pattern>/attachments/*</url-pattern>
     </filter-mapping>
-	
-	<servlet>
-	   <servlet-name>groovyServlet</servlet-name>
-	   <servlet-class>tpl.nutz.web.GroovyVelocityServlet</servlet-class>
-	</servlet>
-	
-	<servlet-mapping>
-	   <servlet-name>groovyServlet</servlet-name>
-	   <url-pattern>*.html</url-pattern>
-	</servlet-mapping>
+    
+    <servlet>
+       <servlet-name>groovyServlet</servlet-name>
+       <servlet-class>tpl.nutz.web.GroovyVelocityServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+       <servlet-name>groovyServlet</servlet-name>
+       <url-pattern>*.html</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+       <servlet-name>runtimeJavaServlet</servlet-name>
+       <servlet-class>tpl.nutz.web.RuntimeJavaServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+       <servlet-name>runtimeJavaServlet</servlet-name>
+       <url-pattern>*.jspx</url-pattern>
+    </servlet-mapping>
     
     <servlet>
        <servlet-name>staticServlet</servlet-name>
