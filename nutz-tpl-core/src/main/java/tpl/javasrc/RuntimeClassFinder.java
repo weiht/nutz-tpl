@@ -174,6 +174,8 @@ public class RuntimeClassFinder {
 		List<String> options = new ArrayList<String>();
 		options.add("-d");
 		options.add(targetPath.toString());
+		options.add("-cp");
+		options.add(targetPath.toString());
 		Iterable<? extends JavaFileObject> javaFiles = fileManager.getJavaFileObjectsFromStrings(srcfiles);
 		CompilationTask task = compiler.getTask(null, fileManager, null,
 				options, null, javaFiles);

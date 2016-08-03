@@ -62,7 +62,7 @@ public class RuntimeClassFinderTest {
 		assertNotNull(finder.findClass("tpl.Nowhere"));
 		assertEquals(1, org.nutz.lang.Files.dirs(targetPath.toFile()).length);
 		assertEquals(1, org.nutz.lang.Files.files(targetPath.toFile(), ".class").length);
-		assertEquals(1, org.nutz.lang.Files.files(targetPath.resolve("tpl").toFile(), ".class").length);
+		assertEquals(2, org.nutz.lang.Files.files(targetPath.resolve("tpl").toFile(), ".class").length);
 		System.out.println(finder.findClass("tpl.Nowhere").newInstance().toString());
 	}
 }
