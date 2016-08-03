@@ -82,9 +82,17 @@ public class WatchDir {
 
 		for (Path dir: dirs) {
 			logger.debug("Scanning {}", dir);
-			registerAll(dir);
+			if (Files.isRegularFile(dir)) {
+				registerSingleFile(dir);
+			} else {
+				registerAll(dir);
+			}
 			logger.debug("Done.");
 		}
+	}
+
+	private void registerSingleFile(Path dir) throws IOException {
+		dir.register(watcher, ENTRY_MODIFY, ENTRY_DELETE);
 	}
 
 	List<EventPair> events() {
@@ -100,7 +108,7 @@ public class WatchDir {
 			List<WatchEvent<?>> lst = key.pollEvents();
 			
 			for (WatchEvent<?> event : lst) {
-				WatchEvent.Kind kind = event.kind();
+				WatchEvent.Kind<?> kind = event.kind();
 	
 				// TBD - provide example of how OVERFLOW event is handled
 				if (kind == OVERFLOW) {
