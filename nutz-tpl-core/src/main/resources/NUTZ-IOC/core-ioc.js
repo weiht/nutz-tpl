@@ -62,6 +62,17 @@ var ioc = {
             }
         }
     },
+    "runtimeClassFinder": {
+    	"type": "tpl.javasrc.RuntimeClassFinder",
+    	"fields": {
+    		"targetDir": {
+    			"java": "$coreConfig.get('classfinder.targetdir')"
+    		}
+    	},
+    	"events": {
+    		"create": "init"
+    	}
+    },
     "administrativeAccountStartupChecker": {
     	"type": "tpl.shiro.AdministrativeAccountStartupChecker",
         "fields" : {

@@ -33,6 +33,8 @@ import org.slf4j.LoggerFactory;
 import tpl.javasrc.WatchDir.EventPair;
 
 public class RuntimeClassFinder {
+	private static final String JAVA_FILE_EXTENSION = ".java";
+
 	private static final Logger logger = LoggerFactory.getLogger(RuntimeClassFinder.class);
 	
 	public static final String SYS_PROP_RUNTIME_SRC_PATHS = "tpl.javasrc.srcpath";
@@ -51,14 +53,17 @@ public class RuntimeClassFinder {
 	private boolean reloadLoader = false, rebuildLoader = false;
 	private JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 	private StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
+	private ClassloaderJavaFileManager customFileManager;
 	
 	private ClassLoader loader;
 	
 	private synchronized void ensureLoader() {
 		if (loader == null || rebuildLoader) {
 			loader = new URLClassLoader(cpurls(), RuntimeClassFinder.class.getClassLoader());
+			customFileManager = new ClassloaderJavaFileManager(loader, fileManager, targetPath);
 		} else if (reloadLoader) {
 			loader = new URLClassLoader(cpurls(), loader);
+			customFileManager = new ClassloaderJavaFileManager(loader, fileManager, targetPath);
 		}
 		rebuildLoader = false;
 		reloadLoader = false;
@@ -171,16 +176,20 @@ public class RuntimeClassFinder {
 			scanForSrcFiles(srcfiles, p);
 		}
 		logger.debug("Compiling all source files: {}", srcfiles);
+		rebuildLoader = true;
+		ensureLoader();
 		List<String> options = new ArrayList<String>();
 		options.add("-d");
 		options.add(targetPath.toString());
 		options.add("-cp");
 		options.add(targetPath.toString());
 		Iterable<? extends JavaFileObject> javaFiles = fileManager.getJavaFileObjectsFromStrings(srcfiles);
-		CompilationTask task = compiler.getTask(null, fileManager, null,
+		CompilationTask task = compiler.getTask(null, customFileManager, null,
 				options, null, javaFiles);
 		try {
 			Boolean result = task.call();
+			rebuildLoader = true;
+			ensureLoader();
 			logger.debug("Compiler result: {}", result);
 		} catch (IllegalStateException e) {
 			logger.warn("", e);
@@ -193,7 +202,7 @@ public class RuntimeClassFinder {
 				@Override
 				public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
 					String fn = file.toString();
-					if (fn.endsWith(".java")) srcfiles.add(fn);
+					if (fn.endsWith(JAVA_FILE_EXTENSION)) srcfiles.add(fn);
 					return FileVisitResult.CONTINUE;
 				}
 			});
@@ -216,7 +225,7 @@ public class RuntimeClassFinder {
 				if (kind == ENTRY_DELETE) {
 					org.nutz.lang.Files.deleteDir(pf.toFile());
 				} else if (kind == ENTRY_CREATE) {
-					for (File f: org.nutz.lang.Files.files(pf.toFile(), ".java")) {
+					for (File f: org.nutz.lang.Files.files(pf.toFile(), JAVA_FILE_EXTENSION)) {
 						srcmap.put(f.getAbsolutePath(), kind);
 					}
 				}
@@ -227,11 +236,15 @@ public class RuntimeClassFinder {
 					srcmap.remove(fn);
 					rebuildLoader = true;
 				} else if (kind == ENTRY_MODIFY) {
-					srcmap.put(fn, kind);
-					rebuildLoader = true;
+					if (fn.endsWith(JAVA_FILE_EXTENSION)) {
+						srcmap.put(fn, kind);
+						rebuildLoader = true;
+					}
 				} else {
-					srcmap.put(fn, kind);
-					reloadLoader = true;
+					if (fn.endsWith(JAVA_FILE_EXTENSION)) {
+						srcmap.put(fn, kind);
+						reloadLoader = true;
+					}
 				}
 			}
 		}
@@ -245,9 +258,11 @@ public class RuntimeClassFinder {
 		options.add("-d");
 		options.add(targetPath.toString());
 		Iterable<? extends JavaFileObject> javaFiles = fileManager.getJavaFileObjectsFromStrings(srcfiles);
-		CompilationTask task = compiler.getTask(null, fileManager, null,
+		CompilationTask task = compiler.getTask(null, customFileManager, null,
 				options, null, javaFiles);
 		Boolean result = task.call();
+		reloadLoader = true;
+		ensureLoader();
 		logger.debug("Compiler result: {}", result);
 	}
 
