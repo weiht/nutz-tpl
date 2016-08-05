@@ -66,6 +66,14 @@ app.register.controller('admin_console.builtin.accounts',
 		}
 	};
 	
+	$scope.applyDataSources = function() {
+		AccountDsService.apply(function(r) {
+			if (typeof r.stackTrace != 'undefined') {
+				alert(r.detailMessage || 'Unknown error.');
+			}
+		});
+	};
+	
 	$scope.viewAccounts = function(eds) {
 		$scope.viewingEDS = eds;
 		$scope.visibleSection = 'admin_console.builtin.accounts.page';

@@ -7,6 +7,7 @@ import java.util.Map;
 import org.nutz.NutRuntimeException;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
+import org.nutz.dao.util.Daos;
 import org.nutz.dao.util.cri.SimpleCriteria;
 import org.nutz.ioc.annotation.InjectName;
 import org.nutz.mvc.adaptor.JsonAdaptor;
@@ -19,6 +20,7 @@ import org.nutz.mvc.annotation.PUT;
 
 import tpl.authc.DbAuthenticationInfo;
 import tpl.entities.EntityDataSource;
+import tpl.nutz.TplJsonIocProvider;
 
 @InjectName("api.entities.builtinAccountDsModule")
 @At("/builtin/account")
@@ -67,12 +69,30 @@ public class AccountDsModule {
 	@At("/ds/")
 	@GET
 	public Map<String, Object> all() {
-		List<EntityDataSource>lst = dao.query(EntityDataSource.class, createCriteria());
+		List<EntityDataSource> lst = dao.query(EntityDataSource.class, createCriteria());
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("result", lst);
 		return result;
 	}
 
+	@At("/ds/")
+	@POST
+	public Map<String, Object> apply() {
+		List<EntityDataSource> lst = dao.query(EntityDataSource.class, createCriteria());
+		for (EntityDataSource eds: lst) {
+			Dao edao = TplJsonIocProvider.nutzIoc().get(null, eds.getDataSourceName() + "Dao");
+			String tbl = DbAuthenticationInfo.TABLE_NAME;
+			if (edao.exists(tbl)) {
+				Daos.migration(edao, DbAuthenticationInfo.class, true, true);
+			} else {
+				edao.create(DbAuthenticationInfo.class, false);
+			}
+		}
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("result", lst);
+		return result;
+	}
+	
 	public void setDao(Dao dao) {
 		this.dao = dao;
 	}

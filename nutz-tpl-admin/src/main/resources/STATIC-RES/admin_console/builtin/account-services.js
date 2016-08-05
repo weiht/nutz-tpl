@@ -12,6 +12,10 @@ app.register.factory('admin_console.entities.builtin.account.dsservice',
 			all: {
 				url: basePath + '/ds/'
 			},
+			apply: {
+				url: basePath + '/ds/',
+				method: 'POST'
+			},
 			add: {
 				method: 'POST'
 			},

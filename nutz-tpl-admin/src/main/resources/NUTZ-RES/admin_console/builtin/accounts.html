@@ -18,7 +18,7 @@
             <tr ng-repeat="eds in edses.result">
                 <td ng-bind="$index + 1">#</td>
                 <td class="ops">
-                    <a class="text-primary" href="javascript:void(0)" title="#text('builtin.accounts.list')" ng-click="viewAccounts(eds)"><i class="fa fa-list"></i></a>
+                    <a class="text-primary hide" href="javascript:void(0)" title="#text('builtin.accounts.list')" ng-click="viewAccounts(eds)"><i class="fa fa-list"></i></a>
                     <a class="text-danger" href="javascript:void(0)" title="#text('remove')" ng-click="remove(eds)"><i class="fa fa-minus"></i></a>
                 </td>
                 <td ng-bind="eds.dataSourceName">dataSourceName</td>

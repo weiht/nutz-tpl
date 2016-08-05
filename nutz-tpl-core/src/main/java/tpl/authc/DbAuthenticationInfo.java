@@ -10,10 +10,11 @@ import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
 
-@Table("core_authentication_info")
+@Table(DbAuthenticationInfo.TABLE_NAME)
 public class DbAuthenticationInfo
 implements SaltedAuthenticationInfo {
 	private static final long serialVersionUID = 1330120182013820951L;
+	public static final String TABLE_NAME = "core_authentication_info";
 	
 	@Name @Column("login_name") @ColDefine(notNull=true, update=false, width=200)
 	private String loginName;
